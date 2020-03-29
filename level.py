@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-
-import math
-import random
+from lib import *
 
 class Level:
     def __init__(self, diff):

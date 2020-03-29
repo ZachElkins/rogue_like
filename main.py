@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-
-import numpy as np
-from level import Level
+from lib import *
 
 def main():
     print("hello world")
