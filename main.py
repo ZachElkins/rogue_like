@@ -3,7 +3,6 @@ from lib import *
 from level import *
 
 def main() :
-    print( "hello world" )
     level = Level( 10 )
     print( np.matrix( level.map() ) )
 
