@@ -9,7 +9,7 @@ class Level:
         # Difficulty of the level
         self.diff = diff
         # 2D list of the map
-        self.map = [["[ ]"] * diff for _ in range(diff)]
+        self.map = [["[# | #]"] * diff for _ in range(diff)]
 
         # Generate level
         self.generate()
@@ -115,7 +115,10 @@ class Level:
     def check_edges( self ) :
         for room in self.rooms :
             room.check_edges( self )
-            self.map[room.get_coords()[0]][room.get_coords()[1]] = f'[{room.get_num_edges()}]'
+            room.check_adjacent( self )
+            self.map[room.get_coords()[0]][room.get_coords()[1]] = f'[{room.get_num_edges()} | {room.get_num_adjacent()}]'
+            room.print_data()
+
 
     def get_map( self ) :
         return self.map
