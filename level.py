@@ -53,3 +53,6 @@ class Level:
 
     def get_map(self):
         return self.map
+    
+    def get_size(self):
+        return self.size
