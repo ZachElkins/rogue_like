@@ -53,6 +53,9 @@ class Level:
 
     def get_map(self):
         return self.map
+
+    def get_rooms(self):
+        return self.size
     
     def get_size(self):
         return self.size
