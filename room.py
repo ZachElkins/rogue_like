@@ -5,6 +5,7 @@ class Room:
         self.coords = coords
         self.edges = []
         self.adjacent = []
+        self.layout = []
 
     def check_adjacent( self, level ) :
         self.num_adjacent = 0
@@ -62,6 +63,19 @@ class Room:
     def get_coords( self ) :
         return self.coords
     
+    def assign_layout( self, layout, room_type ) :
+        self.layout = layout
+        self.room_type = room_type
+    
+    def has_layout( self ) :
+        return not self.layout == []
+
+    def get_layout( self ) :
+        return self.layout
+    
+    def get_room_type( self ) :
+        return self.room_type
+
     def print_data( self ) :
         print(f'Coords: {self.coords} \nEdges: ({self.num_edges}) {self.edges} \nAdjacent: ({self.num_adjacent}) {self.adjacent}')
         print("========================")

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from lib import *
 from room import Room
+from layouts import ROOMS
 
 class Level:
     def __init__( self, diff ) :
@@ -16,6 +17,7 @@ class Level:
         self.shrink_map()
         self.reset_coords()
         self.check_edges()
+        self.assign_layouts()
 
     def generate( self ) :
 
@@ -98,8 +100,7 @@ class Level:
                     del self.map[i][j]
 
         self.size = ( len(self.map), len(self.map[0]) )
-
-        print(f'Reduced size:({self.diff},{self.diff}) => ({self.size[0]},{self.size[1]})')
+        #print(f'Reduced size:({self.diff},{self.diff}) => ({self.size[0]},{self.size[1]})')
 
     def reset_coords( self ) :
         self.rooms = []
@@ -110,15 +111,40 @@ class Level:
                     self.rooms.append( Room( ( i, j ) ) )
                     self.room_coords.append( ( i, j ) )
 
-                
-
     def check_edges( self ) :
         for room in self.rooms :
             room.check_edges( self )
             room.check_adjacent( self )
             self.map[room.get_coords()[0]][room.get_coords()[1]] = f'[{room.get_num_edges()} | {room.get_num_adjacent()}]'
-            room.print_data()
+            # room.print_data()
 
+    def assign_layouts( self ) :
+        room = random.randint( 0, len(self.rooms)-1 )
+
+        # Starting room
+        self.rooms[room].assign_layout( ROOMS["START"], "S" )
+
+        # Ending room
+        final = False
+        while not final :
+            room = random.randint( 0, len(self.rooms)-1 )
+            if not self.rooms[room].has_layout() :
+                self.rooms[room].assign_layout( ROOMS["FINAL"], "F" )
+                final = True
+
+        for room in self.rooms :
+            if not room.has_layout() :
+                layout = random.randint( 0, len(ROOMS["MIDDLE"])-1 )
+                room.assign_layout(  ROOMS["MIDDLE"][layout], "M" )
+
+        for i in range( 0, self.size[0] ) :
+            for j in range( 0, self.size[1] ) :
+                if ( i , j ) in self.room_coords :
+                    for room in self.rooms :
+                        if room.get_coords() == ( i, j ) :
+                            self.map[i][j] = room.get_room_type()
+                else:
+                    self.map[i][j] = " "
 
     def get_map( self ) :
         return self.map
