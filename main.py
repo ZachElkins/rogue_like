@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from lib import *
+from level import *
 
 def main():
     print("hello world")
