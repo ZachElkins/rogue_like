@@ -4,7 +4,7 @@ from level import *
 
 def main() :
     level = Level( 10 )
-    print( np.matrix( level.map() ) )
+    print( np.matrix( level.get_map() ) )
 
 if __name__ == '__main__' :
     main()
