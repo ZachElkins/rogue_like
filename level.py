@@ -24,7 +24,7 @@ class Level:
         self.rooms.append( ( random.randint( 0, self.size-1 ), random.randint( 0, self.size-1 ) ) )
         
         i = 0
-        while i < self.diff:
+        while i < self.diff :
             room_options = []
 
             # For each room add all adjacent rooms and choose 1

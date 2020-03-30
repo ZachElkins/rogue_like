@@ -7,5 +7,5 @@ def main() :
     level = Level( 10 )
     print( np.matrix( level.map() ) )
 
-if __name__ == '__main__':
+if __name__ == '__main__' :
     main()
