@@ -1,4 +1,5 @@
 from lib import *
+from layouts import TAGS
 
 class Room:
     def __init__( self, coords ) :
@@ -64,8 +65,38 @@ class Room:
         return self.coords
     
     def assign_layout( self, layout, room_type ) :
-        self.layout = layout
+        self.layout = copy.deepcopy(layout)
         self.room_type = room_type
+        self.add_edges()
+        
+    def add_edges( self ) :
+
+        print(self.edges)
+        layout_size = len( self.layout )
+
+        # Left
+        if "L" in self.edges :
+            print("Adding LEFT Edge")
+            for i in range( 0, layout_size ) :
+                self.layout[i][0] = TAGS["WALL"]
+        # Right
+        if "R" in self.edges :
+            print("Adding RIGHT Edge")
+            for i in range( 0, layout_size ) :
+                self.layout[i][layout_size-1] = TAGS["WALL"]
+        # Top
+        if "T" in self.edges :
+            print("Adding TOP Edge")
+            for j in range( 0, layout_size ) :
+                self.layout[0][j] = TAGS["WALL"]
+        # Bottom
+        if "B" in self.edges :
+            print("Adding BOTTOM Edge")
+            for j in range( 0, layout_size ) :
+                self.layout[layout_size-1][j] = TAGS["WALL"]
+
+        print( np.matrix( self.layout ) )
+
     
     def has_layout( self ) :
         return not self.layout == []
