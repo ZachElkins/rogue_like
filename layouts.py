@@ -13,7 +13,8 @@ TAGS = {
     "ITEM": "I",
     "STAIRS": "S",
     "TRAP": "T",
-    "OBJECT": "O"
+    "OBJECT": "O",
+    "FLOOR": " "
 }
 
 ROOMS = {

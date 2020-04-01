@@ -106,6 +106,9 @@ class Room :
     
     def get_room_type( self ) :
         return self.room_type
+    
+    def get_size( self ) :
+        return ( len(self.layout) , len(self.layout[0]) )
 
     def print_data( self ) :
         print(f'Coords: {self.coords} \nEdges: ({self.num_edges}) {self.edges} \nAdjacent: ({self.num_adjacent}) {self.adjacent}')
