@@ -3,7 +3,10 @@ from lib import *
 from level import *
 from layouts import *
 
+global player_position
+
 def game_init() :
+
 
     global SURFACE_MAIN
     
@@ -16,9 +19,12 @@ def game_draw( event ) :
     # Clear  surface
     SURFACE_MAIN.fill( COLOR_DEFAULT_BG )
 
-    # Draw map
+    # Draw room
         # Get active room
         # Draw active room
+    
+    # Draw player
+    # Draw UI
     
     # on mouse down
     if event == 5 :
@@ -26,13 +32,6 @@ def game_draw( event ) :
             if room.get_room_type() == "S" :
                 draw_room( room )
 
-
-    # Draw player
-    # SURFACE_MAIN.blit( PLAYER_SPRITE, ( 100, 100 ) )
-    # SURFACE_MAIN.blit( WALL_SPRITE, ( 120, 100 ) )
-    # SURFACE_MAIN.blit( FLOOR_SPRITE, ( 120, 116 ) )
-    # SURFACE_MAIN.blit( ENEMY_SPRITE, ( 140, 100 ) )
-    # SURFACE_MAIN.blit( KEY_SPRITE, ( 160, 100 ) )
 
     # Update display
     pygame.display.update()
@@ -46,13 +45,21 @@ def draw_room( room ) :
     for x in range( 0, size[0] ) :
         for y in range( 0, size[1] ) :
             tile = layout[x][y]
-            if   tile == TAGS["WALL"] : sprite = WALL_SPRITE
-            elif tile == TAGS["FLOOR"] : sprite = FLOOR_SPRITE
-            elif tile == TAGS["ENEMY"] : sprite = ENEMY_SPRITE
-            elif tile == TAGS["PLAYER"] : sprite = PLAYER_SPRITE
-            elif tile == TAGS["PLAYER"] : sprite = PLAYER_SPRITE
+            if   tile == TAGS["WALL"] :
+                sprite = WALL_SPRITE
+            elif tile == TAGS["FLOOR"] :
+                sprite = FLOOR_SPRITE
+            elif tile == TAGS["ENEMY"] :
+                sprite = ENEMY_SPRITE
+            elif tile == TAGS["ITEM"] :
+                sprite = ITEM_SPRITE
+            elif tile == TAGS["PLAYER"] :
+                sprite = FLOOR_SPRITE
+                player_position = ( x, y )
             else : sprite = FLOOR_SPRITE
             SURFACE_MAIN.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
+
+    SURFACE_MAIN.blit( PLAYER_SPRITE, ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
 
 
 def game_main_loop() :
