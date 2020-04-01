@@ -1,7 +1,7 @@
 from lib import *
 from layouts import TAGS
 
-class Room:
+class Room :
     def __init__( self, coords ) :
         self.coords = coords
         self.edges = []

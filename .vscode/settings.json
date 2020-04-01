@@ -1,5 +1,8 @@
 {
     "python.linting.pylintArgs": [
         "--extension-pkg-whitelist=pygame"
-    ]
+    ],
+    "python.linting.pylintPath": "pylint --disable=C0326",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }

@@ -3,7 +3,7 @@ from lib import *
 from room import Room
 from layouts import ROOMS
 
-class Level:
+class Level :
     def __init__( self, diff ) :
         # Size of level
         self.size = ( 0, 0 )
