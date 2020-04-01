@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 from lib import *
-from level import *
-from layouts import *
-from player import *
 
 def game_init() :
 
@@ -22,12 +19,15 @@ def game_draw(  ) :
     # Draw room
         # Get active room
         # Draw active room
-    for room in level.get_rooms() :
-        if room.get_room_type() == "S" :
-            draw_room( room )
+    # for room in level.get_rooms() :
+    #     if room.get_room_type() == "S" :
+    #         draw_room( room )
     
+    draw_room(level.get_room(player.get_room()))
+
     # Draw player
     player_position = player.get_tile()
+
     SURFACE_MAIN.blit( PLAYER_SPRITE_32, ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
     # Draw UI
     
@@ -43,7 +43,7 @@ def get_sprite( tile ) :
     elif tile == TAGS["ENEMY"]  : sprite = ENEMY_SPRITE_16
     elif tile == TAGS["ITEM"]   : sprite = ITEM_SPRITE_16
     elif tile == TAGS["PLAYER"] : sprite = FLOOR_SPRITE_32
-    else : sprite = FLOOR_SPRITE
+    else : sprite = FLOOR_SPRITE_32
 
     return sprite
 
@@ -91,6 +91,8 @@ def main() :
     print( np.matrix( level.get_map() ) )
 
     player = Player( level.get_start_room(), level.get_start_tile() )
+
+    print( level.get_room(player.get_room())) 
 
     print( player.get_tile() )
     

@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 from lib import *
-from room import Room
-from layouts import *
 
 class Level :
     def __init__( self, diff ) :
@@ -172,3 +170,8 @@ class Level :
 
     def get_start_tile( self ) :
         return self.start_tile
+    
+    def get_room( self, coords ) :
+        for room in self.rooms :
+            if room.get_coords() == coords :
+                return room

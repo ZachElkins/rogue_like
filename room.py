@@ -1,5 +1,4 @@
 from lib import *
-from layouts import TAGS
 
 class Room :
     def __init__( self, coords ) :
