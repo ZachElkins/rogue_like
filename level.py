@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from lib import *
 from room import Room
-from layouts import ROOMS
+from layouts import *
 
 class Level :
     def __init__( self, diff ) :
@@ -124,6 +124,15 @@ class Level :
         # Starting room
         self.rooms[room].assign_layout( ROOMS["START"], "S" )
 
+        self.start_room = self.rooms[room].get_coords()
+
+        start_room_layout = self.rooms[room].get_layout()
+
+        for x in range( 0, len( start_room_layout ) ) :
+            for y in range( 0, len( start_room_layout[0] ) ) :
+                if start_room_layout[x][y] == TAGS["PLAYER"]:
+                    self.start_tile = ( x, y )
+
         # Ending room
         final = False
         while not final :
@@ -157,3 +166,9 @@ class Level :
     
     def get_size( self ) :
         return self.size
+    
+    def get_start_room( self ) :
+        return self.start_room
+
+    def get_start_tile( self ) :
+        return self.start_tile
