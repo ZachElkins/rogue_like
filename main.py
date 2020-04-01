@@ -46,20 +46,20 @@ def draw_room( room ) :
         for y in range( 0, size[1] ) :
             tile = layout[x][y]
             if   tile == TAGS["WALL"] :
-                sprite = WALL_SPRITE
+                sprite = WALL_SPRITE_32
             elif tile == TAGS["FLOOR"] :
-                sprite = FLOOR_SPRITE
+                sprite = FLOOR_SPRITE_32
             elif tile == TAGS["ENEMY"] :
-                sprite = ENEMY_SPRITE
+                sprite = ENEMY_SPRITE_16
             elif tile == TAGS["ITEM"] :
-                sprite = ITEM_SPRITE
+                sprite = ITEM_SPRITE_16
             elif tile == TAGS["PLAYER"] :
-                sprite = FLOOR_SPRITE
+                sprite = FLOOR_SPRITE_32
                 player_position = ( x, y )
             else : sprite = FLOOR_SPRITE
             SURFACE_MAIN.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
 
-    SURFACE_MAIN.blit( PLAYER_SPRITE, ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
+    SURFACE_MAIN.blit( PLAYER_SPRITE_32, ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
 
 
 def game_main_loop() :
