@@ -14,25 +14,25 @@ class Player :
         # Left
         if dir == "L" :
             self.tile = ( self.tile[0]-1, self.tile[1] )
-            if self.tile[0] == 0:
+            if self.tile[0] <= 0:
                 self.room = ( self.room[0]-1, self.room[1] )
                 self.tile = self.tile = (ROOMS["SIZE"]-1, self.tile[1] )
         # Right
         if dir == "R" :
             self.tile = ( self.tile[0]+1, self.tile[1] )
-            if self.tile[0] == ROOMS["SIZE"]-1 :
+            if self.tile[0] >= ROOMS["SIZE"]-1 :
                 self.room = ( self.room[0]+1, self.room[1] )
                 self.tile = self.tile = (0, self.tile[1] )
         # Up
         if dir == "U" :
             self.tile = ( self.tile[0], self.tile[1]-1 )
-            if self.tile[1] == 0:
+            if self.tile[1] <= 0:
                 self.room = ( self.room[0], self.room[1]-1 )
                 self.tile = self.tile = (self.tile[0], ROOMS["SIZE"]-1 )
         # Down
         if dir == "D" :
             self.tile = ( self.tile[0], self.tile[1]+1 )
-            if self.tile[1] == ROOMS["SIZE"]-1 :
+            if self.tile[1] >= ROOMS["SIZE"]-1 :
                 self.room = ( self.room[0], self.room[1]+1 )
                 self.tile = self.tile = (self.tile[0], 0 )
 

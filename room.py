@@ -6,6 +6,8 @@ class Room :
         self.edges = []
         self.adjacent = []
         self.layout = []
+        self.hidden = True
+        self.discovered = False
 
     def check_adjacent( self, level ) :
         self.num_adjacent = 0
@@ -59,6 +61,9 @@ class Room :
 
     def get_num_adjacent( self ) :
         return self.num_adjacent
+    
+    def get_adjacent( self ) :
+        return self.adjacent
 
     def get_coords( self ) :
         return self.coords
@@ -77,22 +82,22 @@ class Room :
         if "L" in self.edges :
             print("Adding LEFT Edge")
             for i in range( 0, layout_size ) :
-                self.layout[i][0] = TAGS["WALL"]
+                self.layout[i][0] = ROOM_TAGS["WALL"]
         # Right
         if "R" in self.edges :
             print("Adding RIGHT Edge")
             for i in range( 0, layout_size ) :
-                self.layout[i][layout_size-1] = TAGS["WALL"]
+                self.layout[i][layout_size-1] = ROOM_TAGS["WALL"]
         # Top
         if "T" in self.edges :
             print("Adding TOP Edge")
             for j in range( 0, layout_size ) :
-                self.layout[0][j] = TAGS["WALL"]
+                self.layout[0][j] = ROOM_TAGS["WALL"]
         # Bottom
         if "B" in self.edges :
             print("Adding BOTTOM Edge")
             for j in range( 0, layout_size ) :
-                self.layout[layout_size-1][j] = TAGS["WALL"]
+                self.layout[layout_size-1][j] = ROOM_TAGS["WALL"]
 
         print( np.matrix( self.layout ) )
 
@@ -112,3 +117,15 @@ class Room :
     def print_data( self ) :
         print(f'Coords: {self.coords} \nEdges: ({self.num_edges}) {self.edges} \nAdjacent: ({self.num_adjacent}) {self.adjacent}')
         print("========================")
+
+    def is_hidden( self ) :
+        return self.hidden
+        
+    def unhide( self ) :
+        self.hidden = False
+    
+    def discover( self ) :
+        self.discovered = True
+
+    def is_discovered( self ) :
+        return self.discovered

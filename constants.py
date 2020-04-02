@@ -6,6 +6,7 @@ GAME_HEIGHT = 500
 
 # Sizes (px)
 TILE_SIZE = 32
+MM_SIZE = 16
 
 # Color Defenitions
 COLOR_BEIGE = (189, 176, 145)
@@ -22,6 +23,11 @@ WALL_SPRITE_16 = pygame.image.load( "./sprites/tiles/wall_01x16.png" )
 KEY_SPRITE_16 = pygame.image.load( "./sprites/pickups/key.png" )
 FLOOR_SPRITE_16 = pygame.image.load( "./sprites/tiles/floor_01x16.png" )
 ITEM_SPRITE_16 = pygame.image.load( "./sprites/tiles/floor_01x32.png" )
+
+MM_HIDDEN_SPRITE_16 = pygame.image.load( "./sprites/minimap/hiddenx16.png" )
+MM_VISIBLE_SPRITE_16 =  pygame.image.load( "./sprites/minimap/visiblex16.png" )
+MM_CURRENT_SPRITE_16 =  pygame.image.load( "./sprites/minimap/currentx16.png" )
+MM_UNKNOWN_SPRITE_16 =  pygame.image.load( "./sprites/minimap/unknownx16.png" )
 
 # 32px Sprites
 PLAYER_SPRITE_32 = pygame.image.load( "./sprites/player/playerx32.png" )

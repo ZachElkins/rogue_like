@@ -8,7 +8,7 @@ class Level :
         # Difficulty of the level
         self.diff = diff
         # 2D list of the map
-        self.map = [["[# | #]"] * diff for _ in range(diff)]
+        self.map = [[" "] * diff for _ in range(diff)]
 
         # Generate level
         self.generate()
@@ -56,9 +56,11 @@ class Level :
             
         # Mark all rooms on the map
         for coords in self.room_coords :
-            self.map[coords[0]][coords[1]] = 1
+            self.map[coords[0]][coords[1]] = "#"
 
     def shrink_map( self ) :
+        self.full_map = copy.deepcopy( self.map )
+
         # Find empty rows
         empty_rows = []
 
@@ -105,7 +107,7 @@ class Level :
         self.room_coords = []
         for i in range( 0, self.size[0] ) :
             for j in range( 0, self.size[1] ) :
-                if self.map[i][j] == 1 :
+                if self.map[i][j] == "#" :
                     self.rooms.append( Room( ( i, j ) ) )
                     self.room_coords.append( ( i, j ) )
 
@@ -128,7 +130,7 @@ class Level :
 
         for x in range( 0, len( start_room_layout ) ) :
             for y in range( 0, len( start_room_layout[0] ) ) :
-                if start_room_layout[x][y] == TAGS["PLAYER"]:
+                if start_room_layout[x][y] == ROOM_TAGS["PLAYER"]:
                     self.start_tile = ( x, y )
 
         # Ending room
@@ -175,3 +177,16 @@ class Level :
         for room in self.rooms :
             if room.get_coords() == coords :
                 return room
+    
+    def get_room_map( self ) :
+        room_map = copy.deepcopy( self.full_map )
+
+        for x in range( 0, len( room_map ) ) :
+            for y in range( 0, len( room_map[0] ) ) :
+                for room in self.rooms :
+                    if room.get_coords() == ( x, y ):
+                        room_map[x][y] = room
+        
+        return room_map
+        
+        

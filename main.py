@@ -9,7 +9,7 @@ def game_init() :
     
     SURFACE_MAIN = pygame.display.set_mode( ( GAME_WIDTH, GAME_HEIGHT ) )
 
-    pygame.display.set_caption( "rouge_like" )
+    pygame.display.set_caption( "rogue_like" )
 
 def game_draw(  ) :
     
@@ -17,13 +17,12 @@ def game_draw(  ) :
     SURFACE_MAIN.fill( COLOR_DEFAULT_BG )
 
     # Draw room
-        # Get active room
-        # Draw active room
-    # for room in level.get_rooms() :
-    #     if room.get_room_type() == "S" :
-    #         draw_room( room )
-    
-    draw_room(level.get_room(player.get_room()))
+    draw_room( level.get_room( player.get_room())  )
+
+    # Draw minimap
+    draw_minimap( level.get_room_map() )
+
+    level.get_room_map()
 
     # Draw player
     player_position = player.get_tile()
@@ -37,13 +36,32 @@ def game_draw(  ) :
     pygame.display.update()
     pygame.display.flip()
 
-def get_sprite( tile ) :
-    if   tile == TAGS["WALL"]   : sprite = WALL_SPRITE_32
-    elif tile == TAGS["FLOOR"]  : sprite = FLOOR_SPRITE_32
-    elif tile == TAGS["ENEMY"]  : sprite = ENEMY_SPRITE_16
-    elif tile == TAGS["ITEM"]   : sprite = ITEM_SPRITE_16
-    elif tile == TAGS["PLAYER"] : sprite = FLOOR_SPRITE_32
+def get_map_sprite( tile ) :
+    if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITE_32
+    elif tile == ROOM_TAGS["FLOOR"]  : sprite = FLOOR_SPRITE_32
+    elif tile == ROOM_TAGS["ENEMY"]  : sprite = ENEMY_SPRITE_16
+    elif tile == ROOM_TAGS["ITEM"]   : sprite = ITEM_SPRITE_16
+    elif tile == ROOM_TAGS["PLAYER"] : sprite = FLOOR_SPRITE_32
     else : sprite = FLOOR_SPRITE_32
+
+    return sprite
+
+def get_minimap_sprite( room ) :
+    sprite = MM_HIDDEN_SPRITE_16
+
+    # Check if room exists
+    if type( room ) == type( " " ):
+        return sprite
+
+    print(room.is_discovered())
+
+    if room.get_coords() == player.get_room() :
+        sprite = MM_CURRENT_SPRITE_16
+        room.unhide()  
+    elif not room.is_hidden() : 
+        sprite = MM_VISIBLE_SPRITE_16
+    elif room.is_discovered() :
+        sprite = MM_UNKNOWN_SPRITE_16
 
     return sprite
 
@@ -51,11 +69,41 @@ def draw_room( room ) :
     layout = room.get_layout()
     size = room.get_size()
 
+    # Draw room
     for x in range( 0, size[0] ) :
         for y in range( 0, size[1] ) :
             tile = layout[x][y]
-            sprite = get_sprite(tile)
+            sprite = get_map_sprite(tile)
             SURFACE_MAIN.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
+
+def draw_minimap( room_map ) :
+    # TODO: Get difficulty as size of mini map
+    # TODO: Get offsets
+    diff = 20
+    xoff = 9*32
+    yoff = 0
+
+    # Find unknowns
+    for x in range( 0, diff-1 ) :
+        for y in range( 0, diff-1 ) :
+            if not type( room_map[x][y] ) == type( " " ) and room_map[x][y].get_coords() == player.get_room() :
+                print(f'({x},{y})')
+                for adj in room_map[x][y].get_adjacent() :
+                    # print(f"SELF type is {type(room_map[x][y])}")
+                    # print(f"L type is {type(room_map[x-1][y])}")
+                    # print(f"R type is {type(room_map[x+1][y])}")
+                    # print(f"T type is {type(room_map[x][y-1])}")
+                    # print(f"B type is {type(room_map[x][y+1])}")
+                    if adj == "L" and not type(room_map[x-1][y]) == type(" ") : room_map[x-1][y].discover()
+                    if adj == "R" and not type(room_map[x+1][y]) == type(" ") : room_map[x+1][y].discover()
+                    if adj == "T" and not type(room_map[x][y-1]) == type(" ") : room_map[x][y-1].discover()
+                    if adj == "B" and not type(room_map[x][y+1]) == type(" ") : room_map[x][y+1].discover()
+
+    # Draw minimap
+    for x in range( 0, diff-1 ) :
+        for y in range( 0, diff-1 ) :
+            sprite = get_minimap_sprite( room_map[x][y] )
+            SURFACE_MAIN.blit( sprite, ( x * MM_SIZE + xoff, y * MM_SIZE + yoff ) )
 
 
 def game_main_loop() :
@@ -86,15 +134,14 @@ def main() :
     
     global level
     global player
+    global minimap
 
-    level = Level( 10 )
+    level = Level( 20 )
     print( np.matrix( level.get_map() ) )
 
     player = Player( level.get_start_room(), level.get_start_tile() )
 
-    print( level.get_room(player.get_room())) 
-
-    print( player.get_tile() )
+    #minimap = MiniMap( level )
     
     game_init()
     game_main_loop()

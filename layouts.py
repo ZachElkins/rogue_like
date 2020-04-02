@@ -6,7 +6,7 @@
 # T : Trap
 # O : Oject
 
-TAGS = {
+ROOM_TAGS = {
     "WALL" : "#",
     "PLAYER" : "P",
     "ENEMY": "E",
@@ -15,6 +15,11 @@ TAGS = {
     "TRAP": "T",
     "OBJECT": "O",
     "FLOOR": " "
+}
+
+MM_TAGS = {
+    "ROOM" : "#",
+    "EMPTY" : " "
 }
 
 ROOMS = {
