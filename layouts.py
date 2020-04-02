@@ -6,6 +6,8 @@
 # T : Trap
 # O : Oject
 
+LEVEL_SIZE = 10
+
 ROOM_TAGS = {
     "WALL" : "#",
     "PLAYER" : "P",
