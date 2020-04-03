@@ -77,9 +77,9 @@ def draw_room( room ) :
 def draw_minimap( room_map ) :
     # TODO: Get difficulty as size of mini map
     # TODO: Get offsets
-    diff = 20
-    xoff = 9*32
-    yoff = 0
+    diff = 11
+    xoff = 9*32 + 2
+    yoff = 2
 
     # Find unknowns
     for y in range( 0, diff-1 ) :
