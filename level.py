@@ -14,10 +14,10 @@ class Level :
 
         # Generate level
         self.generate()
-        self.shrink_map()
         self.reset_coords()
         self.check_edges()
         self.assign_layouts()
+        self.set_room_map()
 
     def generate( self ) :
         # Reset rooms
@@ -59,49 +59,14 @@ class Level :
         for coords in self.room_coords :
             self.map[coords[0]][coords[1]] = "#"
 
-    def shrink_map( self ) :
-        self.full_map = copy.deepcopy( self.map )
+    def set_room_map( self ) :
+        self.room_map = copy.deepcopy( self.map )
+        for x in range( 0, len( self.room_map ) ) :
+            for y in range( 0, len( self.room_map[0] ) ) :
+                for room in self.rooms :
+                    if room.get_coords() == ( x, y ):
+                        self.room_map[x][y] = room
 
-        # # Find empty rows
-        # empty_rows = []
-
-        # for i in range( 0, self.diff ) :
-        #     is_empty = True
-        #     j = 0
-        #     while j < self.diff and is_empty :
-        #         if ( i, j ) in self.room_coords :
-        #             # print(f'Row {i} is not empty, has value at ({i}, {j})')
-        #             is_empty = False
-        #         j += 1
-        #     if is_empty :
-        #         empty_rows.append( i )
-
-        # # Remove empty rows
-        # for i in range( self.diff, -1, -1 ) :
-        #     if i in empty_rows :
-        #         del self.map[i]
-
-        # # Find empty columns
-        # empty_cols = []
-
-        # for j in range( 0, self.diff ) :
-        #     is_empty = True
-        #     i = 0
-        #     while i < self.diff and is_empty :
-        #         if ( i, j ) in self.room_coords :
-        #             # print(f'Row {i} is not empty, has value at ({i}, {j})')
-        #             is_empty = False
-        #         i += 1
-        #     if is_empty :
-        #         empty_cols.append( j )
-
-        # for i in range( len( self.map )-1, -1, -1 ) :
-        #     for j in range( self.diff, -1, -1 ) :
-        #         if j in empty_cols :
-        #             del self.map[i][j]
-
-        # self.size = ( len(self.map), len(self.map[0]) )
-        #print(f'Reduced size:({self.diff},{self.diff}) => ({self.size[0]},{self.size[1]})')
 
     def reset_coords( self ) :
         self.rooms = []
@@ -145,6 +110,7 @@ class Level :
         for room in self.rooms :
             if not room.has_layout() :
                 layout = random.randint( 0, len(ROOMS["MIDDLE"])-1 )
+                layout = 0
                 room.assign_layout(  ROOMS["MIDDLE"][layout], "M" )
 
         for i in range( 0, self.size[0] ) :
@@ -180,14 +146,6 @@ class Level :
                 return room
     
     def get_room_map( self ) :
-        room_map = copy.deepcopy( self.full_map )
-
-        for x in range( 0, len( room_map ) ) :
-            for y in range( 0, len( room_map[0] ) ) :
-                for room in self.rooms :
-                    if room.get_coords() == ( x, y ):
-                        room_map[x][y] = room
-        
-        return room_map
+        return self.room_map
         
         

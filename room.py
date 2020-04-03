@@ -16,19 +16,19 @@ class Room :
         level_size = level.get_size()
 
         # Left
-        if ( self.coords[0], self.coords[1]-1 ) in room_coords and not self.coords[1] == 0 :
+        if ( self.coords[0]-1, self.coords[1] ) in room_coords and not self.coords[1] == 0 :
             self.num_adjacent += 1
             self.adjacent.append( "L" )
         # Right
-        if ( self.coords[0], self.coords[1]+1 ) in room_coords and not self.coords[1] == level_size[1]-1 :
+        if ( self.coords[0]+1, self.coords[1] ) in room_coords and not self.coords[1] == level_size[1]-1 :
             self.num_adjacent += 1
             self.adjacent.append( "R" )
         # Top
-        if ( self.coords[0]-1, self.coords[1] ) in room_coords and not self.coords[0] == 0 :
+        if ( self.coords[0], self.coords[1]-1 ) in room_coords and not self.coords[0] == 0 :
             self.num_adjacent += 1
             self.adjacent.append( "T" )
         # Bottom
-        if ( self.coords[0]+1, self.coords[1] ) in room_coords and not self.coords[0] == level_size[0]-1 :
+        if ( self.coords[0], self.coords[1]+1 ) in room_coords and not self.coords[0] == level_size[0]-1 :
             self.num_adjacent += 1
             self.adjacent.append( "B" )
 
@@ -40,19 +40,19 @@ class Room :
         level_size = level.get_size()
 
         # Left
-        if ( self.coords[0], self.coords[1]-1 ) not in room_coords or self.coords[1] == 0 :
+        if ( self.coords[0]-1, self.coords[1] ) not in room_coords or self.coords[1] == 0 :
             self.num_edges += 1
             self.edges.append( "L" )
         # Right
-        if ( self.coords[0], self.coords[1]+1 ) not in room_coords or self.coords[1] == level_size[1]-1 :
+        if ( self.coords[0]+1, self.coords[1] ) not in room_coords or self.coords[1] == level_size[1]-1 :
             self.num_edges += 1
             self.edges.append( "R" )
         # Top
-        if ( self.coords[0]-1, self.coords[1] ) not in room_coords or self.coords[0] == 0 :
+        if ( self.coords[0], self.coords[1]-1 ) not in room_coords or self.coords[0] == 0 :
             self.num_edges += 1
             self.edges.append( "T" )
         # Bottom
-        if ( self.coords[0]+1, self.coords[1] ) not in room_coords or self.coords[0] == level_size[0]-1 :
+        if ( self.coords[0], self.coords[1]+1 ) not in room_coords or self.coords[0] == level_size[0]-1 :
             self.num_edges += 1
             self.edges.append( "B" )
     

@@ -11,7 +11,7 @@ def game_init() :
 
     pygame.display.set_caption( "rogue_like" )
 
-def game_draw(  ) :
+def game_draw() :
     
     # Clear  surface
     SURFACE_MAIN.fill( COLOR_DEFAULT_BG )
@@ -53,8 +53,6 @@ def get_minimap_sprite( room ) :
     if type( room ) == type( " " ):
         return sprite
 
-    print(room.is_discovered())
-
     if room.get_coords() == player.get_room() :
         sprite = MM_CURRENT_SPRITE_16
         room.unhide()  
@@ -70,9 +68,9 @@ def draw_room( room ) :
     size = room.get_size()
 
     # Draw room
-    for x in range( 0, size[0] ) :
-        for y in range( 0, size[1] ) :
-            tile = layout[x][y]
+    for y in range( 0, size[0] ) :
+        for x in range( 0, size[1] ) :
+            tile = layout[y][x]
             sprite = get_map_sprite(tile)
             SURFACE_MAIN.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
 
@@ -84,20 +82,25 @@ def draw_minimap( room_map ) :
     yoff = 0
 
     # Find unknowns
-    for x in range( 0, diff-1 ) :
-        for y in range( 0, diff-1 ) :
-            if not type( room_map[x][y] ) == type( " " ) and room_map[x][y].get_coords() == player.get_room() :
-                print(f'({x},{y})')
-                for adj in room_map[x][y].get_adjacent() :
-                    # print(f"SELF type is {type(room_map[x][y])}")
-                    # print(f"L type is {type(room_map[x-1][y])}")
-                    # print(f"R type is {type(room_map[x+1][y])}")
-                    # print(f"T type is {type(room_map[x][y-1])}")
-                    # print(f"B type is {type(room_map[x][y+1])}")
-                    if adj == "L" and not type(room_map[x-1][y]) == type(" ") : room_map[x-1][y].discover()
-                    if adj == "R" and not type(room_map[x+1][y]) == type(" ") : room_map[x+1][y].discover()
-                    if adj == "T" and not type(room_map[x][y-1]) == type(" ") : room_map[x][y-1].discover()
-                    if adj == "B" and not type(room_map[x][y+1]) == type(" ") : room_map[x][y+1].discover()
+    for y in range( 0, diff-1 ) :
+        for x in range( 0, diff-1 ) :
+            if not type( room_map[y][x] ) == type( " " ) and room_map[y][x].get_coords() == player.get_room() :
+                print( f'({x},{y})' )
+                print( "==================" )
+                print( room_map[y][x].get_adjacent() )
+                for adj in room_map[y][x].get_adjacent() :
+                    if adj == "L" and not type(room_map[y-1][x]) == type(" ") : 
+                        print( "Discovered L" )
+                        room_map[y-1][x].discover()
+                    if adj == "R" and not type(room_map[y+1][x]) == type(" ") : 
+                        print( "Discovered R" )
+                        room_map[y+1][x].discover()
+                    if adj == "T" and not type(room_map[y][x-1]) == type(" ") : 
+                        print( "Discovered T" )
+                        room_map[y][x-1].discover()
+                    if adj == "B" and not type(room_map[y][x+1]) == type(" ") : 
+                        print( "Discovered B" )
+                        room_map[y][x+1].discover()
 
     # Draw minimap
     for x in range( 0, diff-1 ) :
