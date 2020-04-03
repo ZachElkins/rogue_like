@@ -129,11 +129,9 @@ def main() :
     global minimap
 
     level = Level( 20 )
-    print( np.matrix( level.get_map() ) )
+    #print( np.matrix( level.get_map() ) )
 
     player = Player( level.get_start_room(), level.get_start_tile() )
-
-    #minimap = MiniMap( level )
     
     game_init()
     game_main_loop()

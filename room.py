@@ -94,8 +94,6 @@ class Room :
             for j in range( 0, layout_size ) :
                 self.layout[layout_size-1][j] = ROOM_TAGS["WALL"]
 
-        print( np.matrix( self.layout ) )
-
     
     def has_layout( self ) :
         return not self.layout == []

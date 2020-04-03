@@ -10,7 +10,7 @@ class Level :
         # 2D list of the map
         self.map = [[" "] * diff for _ in range(diff)]
 
-        self.num_rooms = random.randint( 5, 25 )
+        self.num_rooms = random.randint( 10, 30 )
 
         # Generate level
         self.generate()

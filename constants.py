@@ -44,7 +44,7 @@ FLOOR_SPRITE_32 = pygame.image.load( "./sprites/tiles/floor_01x32.png" )
 # T : Trap
 # O : Oject
 
-LEVEL_SIZE = 9
+LEVEL_SIZE = 10
 
 ROOM_TAGS = {
     "WALL" : "#",
