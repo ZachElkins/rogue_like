@@ -82,7 +82,6 @@ class Level :
             room.check_edges( self )
             room.check_adjacent( self )
             self.map[room.get_coords()[0]][room.get_coords()[1]] = f'[{room.get_num_edges()} | {room.get_num_adjacent()}]'
-            # room.print_data()
 
     def assign_layouts( self ) :
         room = random.randint( 0, len(self.rooms)-1 )
@@ -110,7 +109,6 @@ class Level :
         for room in self.rooms :
             if not room.has_layout() :
                 layout = random.randint( 0, len(ROOMS["MIDDLE"])-1 )
-                layout = 0
                 room.assign_layout(  ROOMS["MIDDLE"][layout], "M" )
 
         for i in range( 0, self.size[0] ) :

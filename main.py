@@ -85,22 +85,11 @@ def draw_minimap( room_map ) :
     for y in range( 0, diff-1 ) :
         for x in range( 0, diff-1 ) :
             if not type( room_map[y][x] ) == type( " " ) and room_map[y][x].get_coords() == player.get_room() :
-                print( f'({x},{y})' )
-                print( "==================" )
-                print( room_map[y][x].get_adjacent() )
                 for adj in room_map[y][x].get_adjacent() :
-                    if adj == "L" and not type(room_map[y-1][x]) == type(" ") : 
-                        print( "Discovered L" )
-                        room_map[y-1][x].discover()
-                    if adj == "R" and not type(room_map[y+1][x]) == type(" ") : 
-                        print( "Discovered R" )
-                        room_map[y+1][x].discover()
-                    if adj == "T" and not type(room_map[y][x-1]) == type(" ") : 
-                        print( "Discovered T" )
-                        room_map[y][x-1].discover()
-                    if adj == "B" and not type(room_map[y][x+1]) == type(" ") : 
-                        print( "Discovered B" )
-                        room_map[y][x+1].discover()
+                    if adj == "L" and not type(room_map[y-1][x]) == type(" ") : room_map[y-1][x].discover()
+                    if adj == "R" and not type(room_map[y+1][x]) == type(" ") : room_map[y+1][x].discover()
+                    if adj == "T" and not type(room_map[y][x-1]) == type(" ") : room_map[y][x-1].discover()
+                    if adj == "B" and not type(room_map[y][x+1]) == type(" ") : room_map[y][x+1].discover()
 
     # Draw minimap
     for x in range( 0, diff-1 ) :
