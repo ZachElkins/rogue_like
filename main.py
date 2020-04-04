@@ -109,16 +109,16 @@ def game_main_loop() :
                 pygame.quit()
                 sys.exit()
             
-            if event.type == pygame.KEYDOWN :
-                if event.key == pygame.K_LEFT : player.move_tile( "L" )
-                if event.key == pygame.K_RIGHT : player.move_tile( "R" )
-                if event.key == pygame.K_UP : player.move_tile( "U" )
-                if event.key == pygame.K_DOWN : player.move_tile( "D" )
 
+            if event.type == pygame.KEYDOWN :
+
+                if event.key == pygame.K_LEFT : level.move_player( -1, 0 )
+                if event.key == pygame.K_RIGHT : level.move_player( +1, 0 )
+                if event.key == pygame.K_UP   : level.move_player( 0, -1 )
+                if event.key == pygame.K_DOWN : level.move_player( 0, +1 )
+                
                 game_draw()
 
-
-        # Draw Game
 
 def main() :
     
@@ -128,11 +128,11 @@ def main() :
     global player
     global minimap
 
-    level = Level( 20 )
+    player = Player( "Bob" )
+    
+    level = Level( 20, player )
     #print( np.matrix( level.get_map() ) )
 
-    player = Player( level.get_start_room(), level.get_start_tile() )
-    
     game_init()
     game_main_loop()
 

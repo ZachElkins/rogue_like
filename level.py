@@ -2,7 +2,7 @@
 from lib import *
 
 class Level :
-    def __init__( self, diff ) :
+    def __init__( self, diff, player ) :
         # Size of level
         self.size = ( LEVEL_SIZE, LEVEL_SIZE )
         # Difficulty of the level
@@ -11,6 +11,8 @@ class Level :
         self.map = [[" "] * diff for _ in range(diff)]
 
         self.num_rooms = random.randint( 10, 30 )
+
+        self.player = player
 
         # Generate level
         self.generate()
@@ -90,6 +92,7 @@ class Level :
         self.rooms[room].assign_layout( ROOMS["START"], "S" )
 
         self.start_room = self.rooms[room].get_coords()
+        self.player.move_room( self.start_room )
 
         start_room_layout = self.rooms[room].get_layout()
 
@@ -97,6 +100,7 @@ class Level :
             for y in range( 0, len( start_room_layout[0] ) ) :
                 if start_room_layout[x][y] == ROOM_TAGS["PLAYER"]:
                     self.start_tile = ( x, y )
+                    self.player.move_tile( self.start_tile )
 
         # Ending room
         final = False
@@ -145,5 +149,39 @@ class Level :
     
     def get_room_map( self ) :
         return self.room_map
+    
+    def move_player( self, x, y ) :
+        curr_room = self.player.get_room()
+        next_room = ( curr_room[0]+x, curr_room[1]+y )
+
+        layout = self.get_room( curr_room ).get_layout()
+    
+        curr_tile = self.player.get_tile()
+        next_tile = ( curr_tile[0]+x, curr_tile[1]+y )
+
+        print( f'Curr: {curr_tile}' )
+        print( f'Next: {next_tile}' )
+
+        # Left
+        if x < 0 :
+            if next_tile[0] <= 0 :
+                self.player.move_room( next_room )
+                next_tile = ( ROOMS["SIZE"]-1, next_tile[1] )
+        # Right
+        if x > 0 :
+            if next_tile[0] >= ROOMS["SIZE"]-1 :
+                self.player.move_room( next_room )
+                next_tile = ( 0, next_tile[1] )
+        # Top
+        if y < 0 :
+            if next_tile[1] <= 0 :
+                self.player.move_room( next_room )
+                next_tile = ( next_tile[0], ROOMS["SIZE"]-1 )
+        # Bottom
+        if y > 0 :
+            if next_tile[1] >= ROOMS["SIZE"]-1 :
+                self.player.move_room( next_room )
+                next_tile = ( next_tile[0], 0 )
+
         
-        
+        self.player.move_tile( next_tile )
