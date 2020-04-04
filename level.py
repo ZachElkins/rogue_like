@@ -153,14 +153,15 @@ class Level :
     def move_player( self, x, y ) :
         curr_room = self.player.get_room()
         next_room = ( curr_room[0]+x, curr_room[1]+y )
-
-        layout = self.get_room( curr_room ).get_layout()
     
         curr_tile = self.player.get_tile()
         next_tile = ( curr_tile[0]+x, curr_tile[1]+y )
 
-        print( f'Curr: {curr_tile}' )
-        print( f'Next: {next_tile}' )
+        # Check for walls
+        layout = self.get_room( curr_room ).get_layout()
+        next_tile_type = ( layout[next_tile[1]][next_tile[0]] )
+        if next_tile_type == "#" :
+            return
 
         # Left
         if x < 0 :
@@ -182,6 +183,6 @@ class Level :
             if next_tile[1] >= ROOMS["SIZE"]-1 :
                 self.player.move_room( next_room )
                 next_tile = ( next_tile[0], 0 )
-
+        
         
         self.player.move_tile( next_tile )

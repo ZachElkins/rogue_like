@@ -6,11 +6,9 @@ class Player :
         self.name = name
 
     def move_tile( self, tile ) :
-        print( f'TILE: ({tile[0]}, {tile[1]})' )
         self.tile = tile
     
     def move_room( self, room) :
-        print( f'TILE: ({room[0]}, {room[1]})' )
         self.room = room
 
     def move_level( self ) :
@@ -21,3 +19,6 @@ class Player :
 
     def get_tile( self ) :
         return self.tile
+    
+    def get_name( self ) :
+        return self.name
