@@ -1,2 +1,2 @@
-# rouge_like
-Python Rouge Like
+# rogue_like
+Python Rogue Like
