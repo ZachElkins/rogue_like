@@ -157,9 +157,13 @@ class Level :
         curr_tile = self.player.get_tile()
         next_tile = ( curr_tile[0]+x, curr_tile[1]+y )
 
-        # Check for walls
         layout = self.get_room( curr_room ).get_layout()
-        next_tile_type = ( layout[next_tile[1]][next_tile[0]] )
+
+        # Check for edge of map
+        if -1 in next_tile or ROOMS["SIZE"] in next_tile : next_tile_type = " "
+        else : next_tile_type = ( layout[next_tile[1]][next_tile[0]] )
+
+        # Check for walls
         if next_tile_type == "#" :
             return
 
