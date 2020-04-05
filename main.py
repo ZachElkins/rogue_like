@@ -4,8 +4,6 @@ from lib import *
 def game_init() :
 
     global SURFACE_MAIN
-    global room_drawn
-    room_drawn = False
     
     SURFACE_MAIN = pygame.display.set_mode( ( GAME_WIDTH, GAME_HEIGHT ) )
 
@@ -17,7 +15,10 @@ def game_draw() :
     SURFACE_MAIN.fill( COLOR_DEFAULT_BG )
 
     # Draw room
-    draw_room( level.get_room( player.get_room())  )
+    #draw_room( level.get_room( player.get_room() )  )
+
+    SURFACE_MAIN.blit( level.draw_room(), ( 0, 0 ) )
+    # SURFACE_MAIN.blit( level.draw_minimap(), ( 0, 0 ) )
 
     # Draw minimap
     draw_minimap( level.get_room_map() )
@@ -28,23 +29,25 @@ def game_draw() :
     player_position = player.get_tile()
 
     SURFACE_MAIN.blit( PLAYER_SPRITE_32, ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
-    # Draw UI
+   
+    # TODO: Draw UI
     
 
 
     # Update display
     pygame.display.update()
-    pygame.display.flip()
 
-def get_map_sprite( tile ) :
-    if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITE_32
-    elif tile == ROOM_TAGS["FLOOR"]  : sprite = FLOOR_SPRITE_32
-    elif tile == ROOM_TAGS["ENEMY"]  : sprite = ENEMY_SPRITE_16
-    elif tile == ROOM_TAGS["ITEM"]   : sprite = ITEM_SPRITE_16
-    elif tile == ROOM_TAGS["PLAYER"] : sprite = FLOOR_SPRITE_32
-    else : sprite = FLOOR_SPRITE_32
 
-    return sprite
+# def draw_room( room ) :
+#     layout = room.get_layout()
+#     size = room.get_size()
+
+#     # Draw room
+#     for y in range( 0, size[0] ) :
+#         for x in range( 0, size[1] ) :
+#             tile = layout[y][x]
+#             sprite = get_map_sprite(tile)
+#             SURFACE_MAIN.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
 
 def get_minimap_sprite( room ) :
     sprite = MM_HIDDEN_SPRITE_16
@@ -62,18 +65,7 @@ def get_minimap_sprite( room ) :
         sprite = MM_UNKNOWN_SPRITE_16
 
     return sprite
-
-def draw_room( room ) :
-    layout = room.get_layout()
-    size = room.get_size()
-
-    # Draw room
-    for y in range( 0, size[0] ) :
-        for x in range( 0, size[1] ) :
-            tile = layout[y][x]
-            sprite = get_map_sprite(tile)
-            SURFACE_MAIN.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
-
+    
 def draw_minimap( room_map ) :
     # TODO: Get difficulty as size of mini map
     # TODO: Get offsets
