@@ -96,9 +96,9 @@ class Level :
 
         start_room_layout = self.rooms[room].get_layout()
 
-        for x in range( 0, len( start_room_layout ) ) :
-            for y in range( 0, len( start_room_layout[0] ) ) :
-                if start_room_layout[x][y] == ROOM_TAGS["PLAYER"]:
+        for x, row in enumerate( start_room_layout ) :
+            for y, tile in enumerate( row ) :
+                if start_room_layout[x][y] == ROOM_TAGS["PLAYER"] :
                     self.start_tile = ( x, y )
                     self.player.move_tile( self.start_tile )
 
