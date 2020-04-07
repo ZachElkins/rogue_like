@@ -2,7 +2,7 @@
 from lib import *
 
 class Level :
-    def __init__( self, diff, player ) :
+    def __init__( self, player, diff ) :
         # Size of level
         self.size = ( LEVEL_SIZE, LEVEL_SIZE )
         # Difficulty of the level

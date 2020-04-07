@@ -37,18 +37,6 @@ def game_draw() :
     # Update display
     pygame.display.update()
 
-
-# def draw_room( room ) :
-#     layout = room.get_layout()
-#     size = room.get_size()
-
-#     # Draw room
-#     for y in range( 0, size[0] ) :
-#         for x in range( 0, size[1] ) :
-#             tile = layout[y][x]
-#             sprite = get_map_sprite(tile)
-#             SURFACE_MAIN.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
-
 def get_minimap_sprite( room ) :
     sprite = MM_HIDDEN_SPRITE_16
 
