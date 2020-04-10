@@ -35,53 +35,12 @@ PLAYER_SPRITES = {
     "R" : pygame.image.load( "./sprites/player/player_right.png" )
 }
 
-FLOOR_SPRITES = [
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_02.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_03.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_01.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_02.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_03.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_05.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_07.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_08.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_02.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_04.png" ),
-    pygame.image.load( "./sprites/tiles/floor/floor_06.png" ),
-]
+FLOOR_SPRITES = []
+FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_01.png" ), 2 ) )
+FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_02.png" ), 2 ) )
+FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_03.png" ), 2 ) )
+FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_04.png" ), 2 ) )
+FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_05.png" ), 86 ) )
+FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_06.png" ), 2 ) )
+FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_07.png" ), 2 ) )
+FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_08.png" ), 2 ) )
