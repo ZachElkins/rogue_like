@@ -145,7 +145,7 @@ class Room :
 
 
 def get_tile_sprite( tile ) :
-    if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITE_32
+    if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITES[random.randint(0, len( WALL_SPRITES )-1 )]
     elif tile == ROOM_TAGS["STAIRS"] : sprite = STAIR_SPRITE_32
     else : sprite = FLOOR_SPRITES[random.randint(0, len( FLOOR_SPRITES )-1 )]
 

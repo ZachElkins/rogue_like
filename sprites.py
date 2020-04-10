@@ -44,3 +44,14 @@ FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_05
 FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_06.png" ), 2 ) )
 FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_07.png" ), 2 ) )
 FLOOR_SPRITES.extend( repeat( pygame.image.load( "./sprites/tiles/floor/floor_08.png" ), 2 ) )
+
+WALL_SPRITES = [
+    pygame.image.load( "./sprites/tiles/wall/wall_01.png" ),
+    pygame.image.load( "./sprites/tiles/wall/wall_02.png" ),
+    pygame.image.load( "./sprites/tiles/wall/wall_03.png" ),
+    pygame.image.load( "./sprites/tiles/wall/wall_04.png" ),
+    pygame.image.load( "./sprites/tiles/wall/wall_05.png" ),
+    pygame.image.load( "./sprites/tiles/wall/wall_06.png" ),
+    pygame.image.load( "./sprites/tiles/wall/wall_07.png" ),
+    pygame.image.load( "./sprites/tiles/wall/wall_08.png" )
+]
