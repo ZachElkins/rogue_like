@@ -192,34 +192,9 @@ class Level :
         self.player.move_tile( next_tile, direction )
 
     def draw_room( self ) :
-        surface_size = TILE_SIZE * ROOMS["SIZE"]
-        
-        room_surface = pygame.Surface( ( surface_size, surface_size ) )
-        room_surface.fill( COLOR_BEIGE )
-
         room = self.get_room( self.player.get_room() )
-        layout = room.get_layout()
-        size = room.get_size()
+        return room.get_sprite()
 
-        for y in range( 0, size[0] ) :
-            for x in range( 0, size[1] ) :
-                tile = layout[y][x]
-                sprite = get_map_sprite( tile )
-                room_surface.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
-
-        return room_surface
 
     def get_player_sprite( self ) :
         return self.player.get_sprite()
-
-
-def get_map_sprite( tile ) :
-    if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITE_32
-    elif tile == ROOM_TAGS["FLOOR"]  : sprite = FLOOR_SPRITES[1]
-    elif tile == ROOM_TAGS["ENEMY"]  : sprite = BAT_SPRITE_32
-    elif tile == ROOM_TAGS["ITEM"]   : sprite = ITEM_SPRITE_32
-    elif tile == ROOM_TAGS["PLAYER"] : sprite = FLOOR_SPRITE_32
-    elif tile == ROOM_TAGS["STAIRS"] : sprite = STAIR_SPRITE_32
-    else : sprite = FLOOR_SPRITE_32
-
-    return sprite

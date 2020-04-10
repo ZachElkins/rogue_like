@@ -72,6 +72,7 @@ class Room :
         self.layout = copy.deepcopy(layout)
         self.room_type = room_type
         self.add_edges()
+        self.draw_sprite()
         
     def add_edges( self ) :
 
@@ -122,3 +123,30 @@ class Room :
 
     def is_discovered( self ) :
         return self.discovered
+    
+    def draw_sprite( self ) :
+        
+        surface_size = TILE_SIZE * ROOMS["SIZE"]
+        
+        self.sprite = pygame.Surface( ( surface_size, surface_size ) )
+        self.sprite.fill( COLOR_PURPLE )
+
+        size = self.get_size()
+        layout = self.get_layout()
+
+        for y in range( 0, size[0] ) :
+            for x in range( 0, size[1] ) :
+                tile = layout[y][x]
+                sprite = get_tile_sprite( tile )
+                self.sprite.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
+
+    def get_sprite( self ) :
+        return self.sprite
+
+
+def get_tile_sprite( tile ) :
+    if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITE_32
+    elif tile == ROOM_TAGS["STAIRS"] : sprite = STAIR_SPRITE_32
+    else : sprite = FLOOR_SPRITES[random.randint(0, len( FLOOR_SPRITES )-1 )]
+
+    return sprite
