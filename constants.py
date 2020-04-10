@@ -17,28 +17,6 @@ COLOR_BLACK = (0, 0, 0)
 # Game Colors
 COLOR_DEFAULT_BG = COLOR_BEIGE
 
-# 16px Sprites
-PLAYER_SPRITE_16 = pygame.image.load( "./sprites/player/playerx16.png" )
-ENEMY_SPRITE_16 = pygame.image.load( "./sprites/enemies/sludge.png" )
-WALL_SPRITE_16 = pygame.image.load( "./sprites/tiles/wall_01x16.png" )
-KEY_SPRITE_16 = pygame.image.load( "./sprites/pickups/key.png" )
-FLOOR_SPRITE_16 = pygame.image.load( "./sprites/tiles/floor_01x16.png" )
-#ITEM_SPRITE_16 = pygame.image.load( "./sprites/tiles/floor_01x32.png" )
-
-MM_HIDDEN_SPRITE_16 = pygame.image.load( "./sprites/minimap/hiddenx16.png" )
-MM_VISIBLE_SPRITE_16 =  pygame.image.load( "./sprites/minimap/visiblex16.png" )
-MM_CURRENT_SPRITE_16 =  pygame.image.load( "./sprites/minimap/currentx16.png" )
-MM_UNKNOWN_SPRITE_16 =  pygame.image.load( "./sprites/minimap/unknownx16.png" )
-
-# 32px Sprites
-PLAYER_SPRITE_32 = pygame.image.load( "./sprites/player/playerx32.png" )
-BAT_SPRITE_32 = pygame.image.load( "./sprites/enemies/batx32_01.png" )
-WALL_SPRITE_32 = pygame.image.load( "./sprites/tiles/wall_02x32.png" )
-# KEY_SPRITE = pygame.image.load( "./sprites/pickups/key.png" )
-FLOOR_SPRITE_32 = pygame.image.load( "./sprites/tiles/floor_02x32.png" )
-STAIR_SPRITE_32 = pygame.image.load( "./sprites/tiles/stairs_01x32.png" )
-ITEM_SPRITE_32 = pygame.image.load( "./sprites/pickups/coinx32.png" )
-
 # # : Walls
 # P : Player
 # E : Enemy

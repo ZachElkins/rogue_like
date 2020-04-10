@@ -100,7 +100,7 @@ class Level :
             for y, tile in enumerate( row ) :
                 if start_room_layout[x][y] == ROOM_TAGS["PLAYER"] :
                     self.start_tile = ( x, y )
-                    self.player.move_tile( self.start_tile )
+                    self.player.move_tile( self.start_tile, "D" )
 
         # Ending room
         final = False
@@ -150,7 +150,7 @@ class Level :
     def get_room_map( self ) :
         return self.room_map
     
-    def move_player( self, x, y ) :
+    def move_player( self, x, y, direction ) :
         curr_room = self.player.get_room()
         next_room = ( curr_room[0]+x, curr_room[1]+y )
     
@@ -189,7 +189,7 @@ class Level :
                 next_tile = ( next_tile[0], 0 )
         
         
-        self.player.move_tile( next_tile )
+        self.player.move_tile( next_tile, direction )
 
     def draw_room( self ) :
         surface_size = TILE_SIZE * ROOMS["SIZE"]
@@ -209,10 +209,13 @@ class Level :
 
         return room_surface
 
+    def get_player_sprite( self ) :
+        return self.player.get_sprite()
+
 
 def get_map_sprite( tile ) :
     if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITE_32
-    elif tile == ROOM_TAGS["FLOOR"]  : sprite = FLOOR_SPRITES[1]#FLOOR_SPRITE_32
+    elif tile == ROOM_TAGS["FLOOR"]  : sprite = FLOOR_SPRITES[1]
     elif tile == ROOM_TAGS["ENEMY"]  : sprite = BAT_SPRITE_32
     elif tile == ROOM_TAGS["ITEM"]   : sprite = ITEM_SPRITE_32
     elif tile == ROOM_TAGS["PLAYER"] : sprite = FLOOR_SPRITE_32

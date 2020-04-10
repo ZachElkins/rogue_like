@@ -28,6 +28,13 @@ PLAYER_SPRITE_DOWN = pygame.image.load( "./sprites/player/player_down.png" )
 PLAYER_SPRITE_LEFT = pygame.image.load( "./sprites/player/player_left.png" )
 PLAYER_SPRITE_RIGHT = pygame.image.load( "./sprites/player/player_right.png" )
 
+PLAYER_SPRITES = {
+    "U" : pygame.image.load( "./sprites/player/player_up.png" ),
+    "D" : pygame.image.load( "./sprites/player/player_down.png" ),
+    "L" : pygame.image.load( "./sprites/player/player_left.png" ),
+    "R" : pygame.image.load( "./sprites/player/player_right.png" )
+}
+
 FLOOR_SPRITES = [
     pygame.image.load( "./sprites/tiles/floor_01.png" ),
     pygame.image.load( "./sprites/tiles/floor_02.png" ),

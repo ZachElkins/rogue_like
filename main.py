@@ -28,7 +28,7 @@ def game_draw() :
     # Draw player
     player_position = player.get_tile()
 
-    SURFACE_MAIN.blit( PLAYER_SPRITE_DOWN, ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
+    SURFACE_MAIN.blit( level.get_player_sprite(), ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
    
     # TODO: Draw UI
     
@@ -92,10 +92,10 @@ def game_main_loop() :
 
             if event.type == pygame.KEYDOWN :
 
-                if event.key == pygame.K_LEFT : level.move_player( -1, 0 )
-                if event.key == pygame.K_RIGHT : level.move_player( +1, 0 )
-                if event.key == pygame.K_UP   : level.move_player( 0, -1 )
-                if event.key == pygame.K_DOWN : level.move_player( 0, +1 )
+                if event.key == pygame.K_LEFT : level.move_player( -1, 0, "L" )
+                if event.key == pygame.K_RIGHT : level.move_player( +1, 0, "R" )
+                if event.key == pygame.K_UP   : level.move_player( 0, -1, "U" )
+                if event.key == pygame.K_DOWN : level.move_player( 0, +1, "D" )
                 
                 game_draw()
 
