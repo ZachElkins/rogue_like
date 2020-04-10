@@ -129,7 +129,7 @@ class Room :
         surface_size = TILE_SIZE * ROOMS["SIZE"]
         
         self.sprite = pygame.Surface( ( surface_size, surface_size ) )
-        self.sprite.fill( COLOR_PURPLE )
+        self.sprite.fill( COLOR_PURPLE_05 )
 
         size = self.get_size()
         layout = self.get_layout()

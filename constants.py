@@ -11,7 +11,11 @@ MM_SIZE = 16
 # Color Defenitions
 #COLOR_BEIGE = (189, 176, 145)
 COLOR_BEIGE = (181, 174, 150)
-COLOR_PURPLE = (103, 85, 98)
+COLOR_PURPLE_01 = (137, 123, 133)   # Lightest
+COLOR_PURPLE_02 = (126, 106, 120)   #   ||
+COLOR_PURPLE_03 = (103, 85, 98)     #   ||
+COLOR_PURPLE_04 = (80, 67, 76)      #   ||
+COLOR_PURPLE_05 = (48, 43, 48)      # Darkest
 COLOR_BLACK = (0, 0, 0)
 
 # Game Colors
