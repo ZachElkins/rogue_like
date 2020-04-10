@@ -212,7 +212,7 @@ class Level :
 
 def get_map_sprite( tile ) :
     if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITE_32
-    elif tile == ROOM_TAGS["FLOOR"]  : sprite = FLOOR_SPRITE_32
+    elif tile == ROOM_TAGS["FLOOR"]  : sprite = FLOOR_SPRITES[1]#FLOOR_SPRITE_32
     elif tile == ROOM_TAGS["ENEMY"]  : sprite = BAT_SPRITE_32
     elif tile == ROOM_TAGS["ITEM"]   : sprite = ITEM_SPRITE_32
     elif tile == ROOM_TAGS["PLAYER"] : sprite = FLOOR_SPRITE_32

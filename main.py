@@ -28,7 +28,7 @@ def game_draw() :
     # Draw player
     player_position = player.get_tile()
 
-    SURFACE_MAIN.blit( PLAYER_SPRITE_32, ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
+    SURFACE_MAIN.blit( PLAYER_SPRITE_DOWN, ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
    
     # TODO: Draw UI
     
@@ -110,7 +110,7 @@ def main() :
 
     player = Player( "Bob" )
     
-    level = Level( 20, player )
+    level = Level( player, 20 )
     #print( np.matrix( level.get_map() ) )
 
     game_init()
