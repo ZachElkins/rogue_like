@@ -14,13 +14,13 @@ MM_CURRENT_SPRITE_16 =  pygame.image.load( "./sprites/minimap/currentx16.png" )
 MM_UNKNOWN_SPRITE_16 =  pygame.image.load( "./sprites/minimap/unknownx16.png" )
 
 # 32px Sprites
-PLAYER_SPRITE_32 = pygame.image.load( "./sprites/player/playerx32.png" )
-BAT_SPRITE_32 = pygame.image.load( "./sprites/enemies/batx32_01.png" )
-WALL_SPRITE_32 = pygame.image.load( "./sprites/tiles/wall_02x32.png" )
+# PLAYER_SPRITE_32 = pygame.image.load( "./sprites/player/playerx32.png" )
+# BAT_SPRITE_32 = pygame.image.load( "./sprites/enemies/batx32_01.png" )
+# WALL_SPRITE_32 = pygame.image.load( "./sprites/tiles/wall_02x32.png" )
 # KEY_SPRITE = pygame.image.load( "./sprites/pickups/key.png" )
-FLOOR_SPRITE_32 = pygame.image.load( "./sprites/tiles/floor_02x32.png" )
-STAIR_SPRITE_32 = pygame.image.load( "./sprites/tiles/stairs_01x32.png" )
-ITEM_SPRITE_32 = pygame.image.load( "./sprites/pickups/coinx32.png" )
+# FLOOR_SPRITE_32 = pygame.image.load( "./sprites/tiles/floor_02x32.png" )
+# STAIR_SPRITE_32 = pygame.image.load( "./sprites/tiles/stairs_01x32.png" )
+# ITEM_SPRITE_32 = pygame.image.load( "./sprites/pickups/coinx32.png" )
 
 
 PLAYER_SPRITE_UP = pygame.image.load( "./sprites/player/player_up.png" )
@@ -55,3 +55,6 @@ WALL_SPRITES = [
     pygame.image.load( "./sprites/tiles/wall/wall_07.png" ),
     pygame.image.load( "./sprites/tiles/wall/wall_08.png" )
 ]
+
+STAIR_SPRITE = pygame.image.load( "./sprites/tiles/stairs.png" )
+HATCH_SPRITE = pygame.image.load( "./sprites/tiles/hatch.png" )
