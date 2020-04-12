@@ -38,19 +38,22 @@ def game_draw() :
     pygame.display.update()
 
 def get_minimap_sprite( room ) :
-    sprite = MM_HIDDEN_SPRITE_16
+    sprite = pygame.Surface( ( 16, 16 ) )
+
+    sprite.blit( MM_HIDDEN_SPRITE, ( 0, 0 ) )
 
     # Check if room exists
     if type( room ) == type( " " ):
         return sprite
 
     if room.get_coords() == player.get_room() :
-        sprite = MM_CURRENT_SPRITE_16
+        sprite.blit( MM_VISIBLE_SPRITE, ( 0, 0 ) )
+        sprite.blit( MM_CURRENT_SPRITE, ( 0, 0 ) )
         room.unhide()  
     elif not room.is_hidden() : 
-        sprite = MM_VISIBLE_SPRITE_16
+        sprite.blit( MM_VISIBLE_SPRITE, ( 0, 0 ) )
     elif room.is_discovered() :
-        sprite = MM_UNKNOWN_SPRITE_16
+        sprite.blit( MM_UNKNOWN_SPRITE, ( 0, 0 ) )
 
     return sprite
     
