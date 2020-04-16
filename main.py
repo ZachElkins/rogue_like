@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from lib import *
 
-def game_init() :
+def game_init( game ) :
 
     global SURFACE_MAIN
     
@@ -9,96 +9,58 @@ def game_init() :
 
     pygame.display.set_caption( "rogue_like" )
 
-def game_draw() :
+def game_draw( game ) :
     
     # Clear  surface
     SURFACE_MAIN.fill( COLOR_DEFAULT_BG )
 
-    SURFACE_MAIN.blit( level.draw_room(), ( 0, 0 ) )
-    # SURFACE_MAIN.blit( level.draw_minimap(), ( 0, 0 ) )
+    SURFACE_MAIN.blit( game.get_room_surface(), ( 0, 0 ) )
 
-    # Draw minimap
-    draw_minimap( level.get_room_map() )
+    SURFACE_MAIN.blit( game.get_minimap_surface(), ( MM_OFFSET[0], MM_OFFSET[1] ) )
 
-    level.get_room_map()
-
-    # Draw player
-    player_position = player.get_tile()
-
-    SURFACE_MAIN.blit( level.get_player_sprite(), ( player_position[0] * TILE_SIZE, player_position[1] * TILE_SIZE ) )
-   
     # TODO: Draw UI
-    
-
 
     # Update display
     pygame.display.update()
 
-def get_minimap_sprite( room ) :
-    sprite = pygame.Surface( ( 16, 16 ) )
 
-    sprite.blit( MM_HIDDEN_SPRITE, ( 0, 0 ) )
-
-    # Check if room exists
-    if type( room ) == type( " " ):
-        return sprite
-
-    if room.get_coords() == player.get_room() :
-        sprite.blit( MM_VISIBLE_SPRITE, ( 0, 0 ) )
-        sprite.blit( MM_CURRENT_SPRITE, ( 0, 0 ) )
-        room.unhide()  
-    elif not room.is_hidden() : 
-        sprite.blit( MM_VISIBLE_SPRITE, ( 0, 0 ) )
-    elif room.is_discovered() :
-        sprite.blit( MM_UNKNOWN_SPRITE, ( 0, 0 ) )
-
-    return sprite
-    
-def draw_minimap( room_map ) :
-    # TODO: Get difficulty as size of mini map
-    # TODO: Get offsets
-    diff = 11
-    xoff = 9*32 + 2
-    yoff = 2
-
-    # Find unknowns
-    for y in range( 0, diff-1 ) :
-        for x in range( 0, diff-1 ) :
-            if not type( room_map[y][x] ) == type( " " ) and room_map[y][x].get_coords() == player.get_room() :
-                for adj in room_map[y][x].get_adjacent() :
-                    if adj == "L" and not type(room_map[y-1][x]) == type(" ") : room_map[y-1][x].discover()
-                    if adj == "R" and not type(room_map[y+1][x]) == type(" ") : room_map[y+1][x].discover()
-                    if adj == "T" and not type(room_map[y][x-1]) == type(" ") : room_map[y][x-1].discover()
-                    if adj == "B" and not type(room_map[y][x+1]) == type(" ") : room_map[y][x+1].discover()
-
-    # Draw minimap
-    for x in range( 0, diff-1 ) :
-        for y in range( 0, diff-1 ) :
-            sprite = get_minimap_sprite( room_map[x][y] )
-            SURFACE_MAIN.blit( sprite, ( x * MM_SIZE + xoff, y * MM_SIZE + yoff ) )
-
-
-def game_main_loop() :
+def game_main_loop( game ) :
+    key_released = True
 
     while True :
         
+
         events = pygame.event.get()
+
         # Process events
         for event in events :
             if event.type == QUIT :
                 pygame.quit()
                 sys.exit()
             
+        update_game = False
+        if event.type == pygame.KEYDOWN and key_released :
 
-            if event.type == pygame.KEYDOWN :
+            if event.key == pygame.K_LEFT :
+                game.move_player( "L" )
+                update_game = True
+            if event.key == pygame.K_RIGHT :
+                game.move_player( "R" )
+                update_game = True
+            if event.key == pygame.K_UP :
+                game.move_player( "U" )
+                update_game = True
+            if event.key == pygame.K_DOWN :
+                game.move_player( "D" )
+                update_game = True
 
-                if event.key == pygame.K_LEFT : level.move_player( -1, 0, "L" )
-                if event.key == pygame.K_RIGHT : level.move_player( +1, 0, "R" )
-                if event.key == pygame.K_UP   : level.move_player( 0, -1, "U" )
-                if event.key == pygame.K_DOWN : level.move_player( 0, +1, "D" )
+            if update_game  :
+                game.draw()
+                game_draw( game )
+                key_released = False
                 
-                game_draw()
-
+        elif event.type == pygame.KEYUP :
+            key_released = True
 
 def main() :
     
@@ -107,14 +69,12 @@ def main() :
     global level
     global player
     global minimap
-    
-    player = Player( "Bob" )
-    
-    level = Level( player )
-    #print( np.matrix( level.get_map() ) )
+    player_name = "Bob"
 
-    game_init()
-    game_main_loop()
+    game = Dungeon( player_name )
+
+    game_init( game )
+    game_main_loop( game )
 
 if __name__ == '__main__' :
     main()

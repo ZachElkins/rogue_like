@@ -9,6 +9,9 @@ MAP_SIZE = 20
 # Sizes (px)
 TILE_SIZE = 32
 MM_SIZE = 16
+LEVEL_SIZE = 10
+
+MM_OFFSET = ( TILE_SIZE * (LEVEL_SIZE-1) + 2, 2 )
 
 # Color Defenitions
 #COLOR_BEIGE = (189, 176, 145)
@@ -31,7 +34,6 @@ COLOR_DEFAULT_BG = COLOR_BEIGE
 # T : Trap
 # O : Oject
 
-LEVEL_SIZE = 10
 
 ROOM_TAGS = {
     "WALL" : "#",

@@ -11,3 +11,4 @@ from sprites import *
 from player import *
 from room import *
 from level import *
+from dungeon import *

@@ -192,6 +192,5 @@ class Level :
         room = self.get_room( self.player.get_room() )
         return room.get_sprite()
 
-
     def get_player_sprite( self ) :
         return self.player.get_sprite()
