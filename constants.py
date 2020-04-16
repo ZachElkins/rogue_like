@@ -4,6 +4,8 @@ from lib import *
 GAME_WIDTH = 800
 GAME_HEIGHT = 500
 
+MAP_SIZE = 20
+
 # Sizes (px)
 TILE_SIZE = 32
 MM_SIZE = 16

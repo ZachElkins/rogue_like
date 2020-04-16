@@ -14,9 +14,6 @@ def game_draw() :
     # Clear  surface
     SURFACE_MAIN.fill( COLOR_DEFAULT_BG )
 
-    # Draw room
-    #draw_room( level.get_room( player.get_room() )  )
-
     SURFACE_MAIN.blit( level.draw_room(), ( 0, 0 ) )
     # SURFACE_MAIN.blit( level.draw_minimap(), ( 0, 0 ) )
 
@@ -110,10 +107,10 @@ def main() :
     global level
     global player
     global minimap
-
+    
     player = Player( "Bob" )
     
-    level = Level( player, 20 )
+    level = Level( player )
     #print( np.matrix( level.get_map() ) )
 
     game_init()

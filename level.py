@@ -2,13 +2,12 @@
 from lib import *
 
 class Level :
-    def __init__( self, player, diff ) :
+    def __init__( self, player ) :
         # Size of level
         self.size = ( LEVEL_SIZE, LEVEL_SIZE )
-        # Difficulty of the level
-        self.diff = diff
+
         # 2D list of the map
-        self.map = [[" "] * diff for _ in range(diff)]
+        self.map = [[" "] * MAP_SIZE for _ in range( MAP_SIZE )]
 
         self.num_rooms = random.randint( 10, 30 )
 
@@ -24,8 +23,6 @@ class Level :
     def generate( self ) :
         # Reset rooms
         self.room_coords = []
-
-        print( f'generating a new map (difficulty: {self.diff})' )
 
         # Create first room
         self.room_coords.append( ( random.randint( 0, self.size[0] ), random.randint( 0, self.size[1] ) ) )
