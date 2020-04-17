@@ -6,6 +6,7 @@ class Dungeon :
         self.level = Level( self.player )
         self.draw_minimap()
         self.draw_room()
+        self.level_number = 1
     
     def draw( self ) :
         self.draw_room()
@@ -33,6 +34,7 @@ class Dungeon :
 
         # Save surface
         self.room_surface = room_map
+
 
     def draw_minimap( self ) :
         # TODO: Replace diff with some constant
@@ -64,6 +66,12 @@ class Dungeon :
 
     def get_minimap_surface( self ) :
         return self.minimap_surface
+    
+    def get_level_number( self ) :
+        return self.level_number
+    
+    def get_player_name( self ) :
+        return self.player.get_name()
 
 
 def get_minimap_sprite( room, player_coords ) :

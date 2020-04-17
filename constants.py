@@ -10,7 +10,6 @@ MAP_SIZE = 20
 TILE_SIZE = 32
 MM_SIZE = 16
 LEVEL_SIZE = 10
-
 MM_OFFSET = ( TILE_SIZE * (LEVEL_SIZE-1) + 2, 2 )
 
 # Color Defenitions
@@ -22,6 +21,11 @@ COLOR_PURPLE_03 = (103, 85, 98)     #   ||
 COLOR_PURPLE_04 = (80, 67, 76)      #   ||
 COLOR_PURPLE_05 = (48, 43, 48)      # Darkest
 COLOR_BLACK = (0, 0, 0)
+
+# Fonts
+pygame.font.init()
+TITLE_FONT = pygame.font.Font( "./fonts/KarmaFuture.ttf", 24 )
+TEXT_FONT = pygame.font.Font( "./fonts/alphbeta.ttf", 16 )
 
 # Game Colors
 COLOR_DEFAULT_BG = COLOR_BEIGE

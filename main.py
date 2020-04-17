@@ -16,10 +16,14 @@ def game_draw( game ) :
 
     SURFACE_MAIN.blit( game.get_room_surface(), ( 0, 0 ) )
 
-    SURFACE_MAIN.blit( game.get_minimap_surface(), ( MM_OFFSET[0], MM_OFFSET[1] ) )
+    SURFACE_MAIN.blit( game.get_minimap_surface(), MM_OFFSET )
 
     # TODO: Draw UI
-
+    name_text = TITLE_FONT.render( game.get_player_name(), 0, COLOR_PURPLE_04, None )
+    SURFACE_MAIN.blit( name_text, ( MM_OFFSET[1], MM_OFFSET[0] ) )
+    
+    level_text = TEXT_FONT.render( f'Level: {game.get_level_number()}', 0, COLOR_PURPLE_03, None )
+    SURFACE_MAIN.blit( level_text, ( MM_OFFSET[1], MM_OFFSET[0] + 32 ) )
     # Update display
     pygame.display.update()
 
@@ -29,7 +33,6 @@ def game_main_loop( game ) :
 
     while True :
         
-
         events = pygame.event.get()
 
         # Process events
@@ -65,11 +68,8 @@ def game_main_loop( game ) :
 def main() :
     
     pygame.init()
-    
-    global level
-    global player
-    global minimap
-    player_name = "Bob"
+
+    player_name = "Player Name"
 
     game = Dungeon( player_name )
 

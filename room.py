@@ -8,6 +8,8 @@ class Room :
         self.layout = []
         self.hidden = True
         self.discovered = False
+        self.closed = True
+        self.keys = []
 
     def check_adjacent( self, level ) :
         self.num_adjacent = 0
@@ -72,7 +74,7 @@ class Room :
         self.layout = copy.deepcopy(layout)
         self.room_type = room_type
         self.add_edges()
-        self.draw_sprite()
+        self.draw_base_sprite()
         
     def add_edges( self ) :
 
@@ -95,7 +97,23 @@ class Room :
             for j in range( 0, layout_size ) :
                 self.layout[layout_size-1][j] = ROOM_TAGS["WALL"]
 
-    
+    def give_key( self ) : 
+        size = self.get_size()
+        layout = self.get_layout()
+
+        tile_found = False
+        while not tile_found :
+            # Keys won't spawn on edges
+            x = random.randint( 1, size[0]-2 )
+            y = random.randint( 1, size[0]-2 )
+            if layout[x][y] == ROOM_TAGS["FLOOR"] and ( x, y ) not in self.keys :
+                self.keys.append( (x, y) )
+                tile_found = True
+                self.draw_sprite()
+                    
+    def get_keys( self ) :
+        return self.keys
+
     def has_layout( self ) :
         return not self.layout == []
 
@@ -120,16 +138,19 @@ class Room :
     
     def discover( self ) :
         self.discovered = True
+    
+    def open_hatch( self ) :
+        self.closed = False
 
     def is_discovered( self ) :
         return self.discovered
     
-    def draw_sprite( self ) :
+    def draw_base_sprite( self ) :
         
         surface_size = TILE_SIZE * ROOMS["SIZE"]
         
-        self.sprite = pygame.Surface( ( surface_size, surface_size ) )
-        self.sprite.fill( COLOR_PURPLE_05 )
+        self.base_sprite = pygame.Surface( ( surface_size, surface_size ) )
+        self.base_sprite.fill( COLOR_PURPLE_05 )
 
         size = self.get_size()
         layout = self.get_layout()
@@ -137,16 +158,34 @@ class Room :
         for y in range( 0, size[0] ) :
             for x in range( 0, size[1] ) :
                 tile = layout[y][x]
-                sprite = get_tile_sprite( tile )
-                self.sprite.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
+                sprite = get_tile_sprite( tile, self.closed )
+                self.base_sprite.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
+
+        self.sprite = copy.copy( self.base_sprite )
+
+    def draw_sprite( self ) :
+        size = self.get_size()
+        layout = self.get_layout()
+        self.sprite = copy.copy( self.base_sprite )
+
+        # Draw keys
+        for x in range( 0, size[0] ) :
+            for y in range( 0, size[1] ) :
+                if ( x, y ) in self.keys :
+                    self.sprite.blit( ITEM_SPRITES["KEY"],( x * TILE_SIZE, y * TILE_SIZE ) )
 
     def get_sprite( self ) :
         return self.sprite
 
-
-def get_tile_sprite( tile ) :
-    if   tile == ROOM_TAGS["WALL"]   : sprite = WALL_SPRITES[random.randint(0, len( WALL_SPRITES )-1 )]
-    elif tile == ROOM_TAGS["STAIRS"] : sprite = HATCH_SPRITE #STAIR_SPRITE
-    else : sprite = FLOOR_SPRITES[random.randint(0, len( FLOOR_SPRITES )-1 )]
+def get_tile_sprite( tile, closed ) :
+    if tile == ROOM_TAGS["WALL"] :
+        sprite = WALL_SPRITES[random.randint(0, len( WALL_SPRITES )-1 )]
+    elif tile == ROOM_TAGS["STAIRS"] :
+        if closed :
+            sprite = HATCH_SPRITE
+        else :
+            sprite = STAIR_SPRITE
+    else :
+        sprite = FLOOR_SPRITES[random.randint(0, len( FLOOR_SPRITES )-1 )]
 
     return sprite

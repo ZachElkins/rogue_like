@@ -19,10 +19,13 @@ class Level :
         self.check_edges()
         self.assign_layouts()
         self.set_room_map()
+        self.give_keys()
 
     def generate( self ) :
         # Reset rooms
         self.room_coords = []
+
+        self.keys = math.floor( self.num_rooms / 4 ) + random.randint( -1, 1 )
 
         # Create first room
         self.room_coords.append( ( random.randint( 0, self.size[0] ), random.randint( 0, self.size[1] ) ) )
@@ -65,6 +68,10 @@ class Level :
                 for room in self.rooms :
                     if room.get_coords() == ( x, y ):
                         self.room_map[x][y] = room
+
+    def give_keys( self ) :
+        for i in range( 0, self.keys+1 ) :
+            self.rooms[ random.randint (0, len( self.rooms )-1 ) ].give_key()
 
 
     def reset_coords( self ) :
@@ -121,6 +128,12 @@ class Level :
                 else:
                     self.map[i][j] = " "
 
+    def open_hatch( self ) :
+        if self.player.keys() == self.num_keys :
+            for room in self.rooms :
+                if room.get_room_type() == "F" :
+                    room.open_hatch()
+   
     def get_map( self ) :
         return self.map
 
@@ -157,7 +170,7 @@ class Level :
         layout = self.get_room( curr_room ).get_layout()
 
         # Check for edge of map
-        if -1 in next_tile or ROOMS["SIZE"] in next_tile : next_tile_type = " "
+        if -1 in next_tile or ROOMS["SIZE"] in next_tile : next_tile_type = ROOM_TAGS["FLOOR"]
         else : next_tile_type = ( layout[next_tile[1]][next_tile[0]] )
 
         # Check for walls
@@ -187,6 +200,9 @@ class Level :
         
         
         self.player.move_tile( next_tile, direction )
+
+        self.get_room( curr_room ).draw_sprite()
+
 
     def draw_room( self ) :
         room = self.get_room( self.player.get_room() )
