@@ -72,6 +72,12 @@ class Dungeon :
     
     def get_player_name( self ) :
         return self.player.get_name()
+    
+    def get_keys_collected( self ) :
+        return self.player.get_num_keys()
+    
+    def get_keys_total( self ) :
+        return self.level.get_num_keys()
 
 
 def get_minimap_sprite( room, player_coords ) :

@@ -133,7 +133,10 @@ class Level :
             for room in self.rooms :
                 if room.get_room_type() == "F" :
                     room.open_hatch()
-   
+    
+    def get_num_keys( self ) :
+        return self.keys
+
     def get_map( self ) :
         return self.map
 
@@ -202,7 +205,19 @@ class Level :
         self.player.move_tile( next_tile, direction )
 
         self.get_room( curr_room ).draw_sprite()
+        
+        self.check_player_position()
 
+    def check_player_position( self ) :
+        # Check for keys
+        player_tile = self.player.get_tile()
+        curr_room = self.get_room( self.player.get_room() )
+        key_tiles = curr_room.get_key_coords()
+        
+        if player_tile in key_tiles :
+            self.player.pick_up( "KEY" )
+            key_tiles.remove( player_tile )
+            curr_room.draw_sprite()
 
     def draw_room( self ) :
         room = self.get_room( self.player.get_room() )

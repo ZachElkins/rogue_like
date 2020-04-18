@@ -25,7 +25,7 @@ COLOR_BLACK = (0, 0, 0)
 # Fonts
 pygame.font.init()
 TITLE_FONT = pygame.font.Font( "./fonts/KarmaFuture.ttf", 24 )
-TEXT_FONT = pygame.font.Font( "./fonts/alphbeta.ttf", 16 )
+TEXT_FONT = pygame.font.Font( "./fonts/alphbeta.ttf", 20 )
 
 # Game Colors
 COLOR_DEFAULT_BG = COLOR_BEIGE

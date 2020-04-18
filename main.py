@@ -22,8 +22,12 @@ def game_draw( game ) :
     name_text = TITLE_FONT.render( game.get_player_name(), 0, COLOR_PURPLE_04, None )
     SURFACE_MAIN.blit( name_text, ( MM_OFFSET[1], MM_OFFSET[0] ) )
     
-    level_text = TEXT_FONT.render( f'Level: {game.get_level_number()}', 0, COLOR_PURPLE_03, None )
+    level_text = TEXT_FONT.render( f'Level {game.get_level_number()}', 0, COLOR_PURPLE_03, None )
     SURFACE_MAIN.blit( level_text, ( MM_OFFSET[1], MM_OFFSET[0] + 32 ) )
+    
+    keys_text = TEXT_FONT.render( f'Keys {game.get_keys_collected()}/{game.get_keys_total()}', 0, COLOR_PURPLE_03, None )
+    SURFACE_MAIN.blit( keys_text, ( MM_OFFSET[1], MM_OFFSET[0] + 48 ) )
+
     # Update display
     pygame.display.update()
 

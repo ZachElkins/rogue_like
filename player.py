@@ -4,6 +4,7 @@ class Player :
     
     def __init__( self, name ) :
         self.name = name
+        self.keys = 0
 
     def move_tile( self, tile, direction ) :
         self.tile = tile
@@ -13,7 +14,7 @@ class Player :
         self.room = room
 
     def move_level( self ) :
-        pass
+        self.keys = 0
 
     def get_room( self ) :
         return self.room
@@ -23,6 +24,13 @@ class Player :
     
     def get_name( self ) :
         return self.name
+
+    def get_num_keys( self ) :
+        return self.keys 
     
+    def pick_up( self, item ) :
+        if item == "KEY" :
+            self.keys += 1
+
     def get_sprite( self ) :
         return self.sprite

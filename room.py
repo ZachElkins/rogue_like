@@ -111,7 +111,7 @@ class Room :
                 tile_found = True
                 self.draw_sprite()
                     
-    def get_keys( self ) :
+    def get_key_coords( self ) :
         return self.keys
 
     def has_layout( self ) :
