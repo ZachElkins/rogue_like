@@ -19,7 +19,7 @@ class Level :
         self.check_edges()
         self.assign_layouts()
         self.set_room_map()
-        self.give_keys()
+        self.distribute_keys()
 
     def generate( self ) :
         # Reset rooms
@@ -69,8 +69,8 @@ class Level :
                     if room.get_coords() == ( x, y ):
                         self.room_map[x][y] = room
 
-    def give_keys( self ) :
-        for i in range( 0, self.keys+1 ) :
+    def distribute_keys( self ) :
+        for i in range( 0, self.keys ) :
             self.rooms[ random.randint (0, len( self.rooms )-1 ) ].give_key()
 
 
