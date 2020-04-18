@@ -75,6 +75,20 @@ class Room :
         self.room_type = room_type
         self.add_edges()
         self.draw_base_sprite()
+    
+    def get_free_tiles( self ) :
+        size = self.get_size()
+        layout = self.get_layout()
+
+        free_tiles = ( size[0] - 2 ) * ( size[1] - 2 )
+        for x in range( 1, size[0]-3 ) :
+            for y in range( 1, size[1]-3 ) :
+                if layout[x][y] in self.keys :
+                    free_tiles -= 1
+                elif layout[y][x] == ROOM_TAGS["WALL"] :
+                    free_tiles -= 1
+        
+        return free_tiles
         
     def add_edges( self ) :
 
@@ -98,6 +112,10 @@ class Room :
                 self.layout[layout_size-1][j] = ROOM_TAGS["WALL"]
 
     def give_key( self ) : 
+        
+        if self.get_free_tiles() <= 0 :
+            return False
+
         size = self.get_size()
         layout = self.get_layout()
 
@@ -105,11 +123,12 @@ class Room :
         while not tile_found :
             # Keys won't spawn on edges
             x = random.randint( 1, size[0]-2 )
-            y = random.randint( 1, size[0]-2 )
-            if layout[y][x] == ROOM_TAGS["FLOOR"] and ( y, x ) not in self.keys :
+            y = random.randint( 1, size[1]-2 )
+            if layout[y][x] == ROOM_TAGS["FLOOR"] and ( x, y ) not in self.keys :
                 self.keys.append( (x, y) )
                 tile_found = True
                 self.draw_sprite()
+                return True
                     
     def get_key_coords( self ) :
         return self.keys

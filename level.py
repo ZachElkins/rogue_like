@@ -26,7 +26,7 @@ class Level :
         self.room_coords = []
 
         self.keys = math.floor( self.num_rooms / 4 ) + random.randint( -1, 1 )
-        self.keys = 1000
+
         # Create first room
         self.room_coords.append( ( random.randint( 0, self.size[0] ), random.randint( 0, self.size[1] ) ) )
         
@@ -73,7 +73,8 @@ class Level :
         for i in range( 0, self.keys ) :
             room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
             if room.room_type == "M" :
-                room.give_key()
+                while not room.give_key() :
+                    room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
 
 
     def reset_coords( self ) :
