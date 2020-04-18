@@ -25,7 +25,7 @@ class Level :
         # Reset rooms
         self.room_coords = []
 
-        self.keys = math.floor( self.num_rooms / 4 ) + random.randint( -1, 1 )
+        self.num_keys = math.floor( self.num_rooms / 4 ) + random.randint( -1, 1 )
 
         # Create first room
         self.room_coords.append( ( random.randint( 0, self.size[0] ), random.randint( 0, self.size[1] ) ) )
@@ -70,7 +70,7 @@ class Level :
                         self.room_map[x][y] = room
 
     def distribute_keys( self ) :
-        for i in range( 0, self.keys ) :
+        for i in range( 0, self.num_keys ) :
             room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
             if room.room_type == "M" :
                 while not room.give_key() :
@@ -132,13 +132,14 @@ class Level :
                     self.map[i][j] = " "
 
     def open_hatch( self ) :
-        if self.player.keys() == self.num_keys :
+        if self.player.get_num_keys() == self.num_keys :
             for room in self.rooms :
                 if room.get_room_type() == "F" :
                     room.open_hatch()
+                    room.draw_sprite()
     
     def get_num_keys( self ) :
-        return self.keys
+        return self.num_keys
 
     def get_map( self ) :
         return self.map
@@ -219,6 +220,7 @@ class Level :
         
         if player_tile in key_tiles :
             self.player.pick_up( "KEY" )
+            self.open_hatch()
             key_tiles.remove( player_tile )
             curr_room.draw_sprite()
 

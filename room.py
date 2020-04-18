@@ -177,7 +177,7 @@ class Room :
         for y in range( 0, size[0] ) :
             for x in range( 0, size[1] ) :
                 tile = layout[y][x]
-                sprite = get_tile_sprite( tile, self.closed )
+                sprite = get_tile_sprite( tile )
                 self.base_sprite.blit( sprite, ( x * TILE_SIZE, y * TILE_SIZE ) )
 
         self.sprite = copy.copy( self.base_sprite )
@@ -193,18 +193,18 @@ class Room :
                 if ( x, y ) in self.keys :
                     self.sprite.blit( ITEM_SPRITES["KEY"],( x * TILE_SIZE, y * TILE_SIZE ) )
 
+        if self.room_type == "F" and not self.closed :
+            for y in range( 0, size[0] ) :
+                for x in range( 0, size[1] ) :
+                    if layout[y][x] == ROOM_TAGS["STAIRS"] : 
+                        self.sprite.blit( STAIR_SPRITE,  ( x * TILE_SIZE, y * TILE_SIZE ) )
+
     def get_sprite( self ) :
         return self.sprite
 
-def get_tile_sprite( tile, closed ) :
-    if tile == ROOM_TAGS["WALL"] :
-        sprite = WALL_SPRITES[random.randint(0, len( WALL_SPRITES )-1 )]
-    elif tile == ROOM_TAGS["STAIRS"] :
-        if closed :
-            sprite = HATCH_SPRITE
-        else :
-            sprite = STAIR_SPRITE
-    else :
-        sprite = FLOOR_SPRITES[random.randint(0, len( FLOOR_SPRITES )-1 )]
+def get_tile_sprite( tile ) :
+    if tile == ROOM_TAGS["WALL"]     : sprite = WALL_SPRITES[random.randint(0, len( WALL_SPRITES )-1 )]
+    elif tile == ROOM_TAGS["STAIRS"] : sprite = HATCH_SPRITE
+    else :  sprite = FLOOR_SPRITES[random.randint(0, len( FLOOR_SPRITES )-1 )]
 
     return sprite
