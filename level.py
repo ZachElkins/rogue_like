@@ -3,6 +3,7 @@ from lib import *
 
 class Level :
     def __init__( self, player ) :
+        self.complete = False
         # Size of level
         self.size = ( LEVEL_SIZE, LEVEL_SIZE )
 
@@ -71,7 +72,6 @@ class Level :
 
     def distribute_keys( self ) :
         for i in range( 0, self.num_keys ) :
-            print( i )
             room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
             while not room.give_key() :
                 room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
@@ -159,6 +159,9 @@ class Level :
     def get_start_tile( self ) :
         return self.start_tile
     
+    def is_complete( self ) :
+        return self.complete
+    
     def get_room( self, coords ) :
         for room in self.rooms :
             if room.get_coords() == coords :
@@ -224,8 +227,9 @@ class Level :
             key_tiles.remove( player_tile )
             curr_room.draw_sprite()
 
-        # if curr_room.room_type == "F" :
-        #     for 
+        if curr_room.get_stairs_coords() :
+            if curr_room.get_stairs_coords() == player_tile :
+                self.complete = True
 
     def draw_room( self ) :
         room = self.get_room( self.player.get_room() )

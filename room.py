@@ -128,7 +128,6 @@ class Room :
                 self.keys.append( (x, y) )
                 tile_found = True
                 self.draw_sprite()
-                print( f"Key generated at ({x},{y})" )
                 return True
                     
     def get_key_coords( self ) :

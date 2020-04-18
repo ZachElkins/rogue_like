@@ -6,7 +6,6 @@ class Dungeon :
         self.level = Level( self.player )
         self.draw_minimap()
         self.draw_room()
-        self.level_number = 1
     
     def draw( self ) :
         self.draw_room()
@@ -19,6 +18,10 @@ class Dungeon :
         if direction == "D" : move_coords = ( 0, 1 )
         
         self.level.move_player( move_coords[0], move_coords[1], direction ) 
+
+        if self.level.is_complete() :
+            self.level = Level( self.player )
+            self.player.move_level()
 
     def draw_room( self ) :
         # Get room from level
@@ -68,7 +71,7 @@ class Dungeon :
         return self.minimap_surface
     
     def get_level_number( self ) :
-        return self.level_number
+        return self.player.get_level()
     
     def get_player_name( self ) :
         return self.player.get_name()
