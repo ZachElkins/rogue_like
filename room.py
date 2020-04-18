@@ -106,7 +106,7 @@ class Room :
             # Keys won't spawn on edges
             x = random.randint( 1, size[0]-2 )
             y = random.randint( 1, size[0]-2 )
-            if layout[x][y] == ROOM_TAGS["FLOOR"] and ( x, y ) not in self.keys :
+            if layout[y][x] == ROOM_TAGS["FLOOR"] and ( y, x ) not in self.keys :
                 self.keys.append( (x, y) )
                 tile_found = True
                 self.draw_sprite()
