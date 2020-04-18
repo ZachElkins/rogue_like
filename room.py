@@ -113,7 +113,7 @@ class Room :
 
     def give_key( self ) : 
         
-        if self.get_free_tiles() <= 0 :
+        if self.get_free_tiles() <= 0 or self.room_type != "M" :
             return False
 
         size = self.get_size()
@@ -128,6 +128,7 @@ class Room :
                 self.keys.append( (x, y) )
                 tile_found = True
                 self.draw_sprite()
+                print( f"Key generated at ({x},{y})" )
                 return True
                     
     def get_key_coords( self ) :
@@ -164,6 +165,18 @@ class Room :
     def is_discovered( self ) :
         return self.discovered
     
+    def get_stairs_coords( self ) :
+        size = self.get_size()
+        layout = self.get_layout()
+        
+        if self.room_type != "F" :
+            return False
+        
+        for y in range( 0, size[0] ) :
+            for x in range( 0, size[1] ) :
+                if layout[y][x] == ROOM_TAGS["STAIRS"] :
+                    return ( x, y )
+    
     def draw_base_sprite( self ) :
         
         surface_size = TILE_SIZE * ROOMS["SIZE"]
@@ -193,11 +206,13 @@ class Room :
                 if ( x, y ) in self.keys :
                     self.sprite.blit( ITEM_SPRITES["KEY"],( x * TILE_SIZE, y * TILE_SIZE ) )
 
-        if self.room_type == "F" and not self.closed :
-            for y in range( 0, size[0] ) :
-                for x in range( 0, size[1] ) :
-                    if layout[y][x] == ROOM_TAGS["STAIRS"] : 
-                        self.sprite.blit( STAIR_SPRITE,  ( x * TILE_SIZE, y * TILE_SIZE ) )
+        if self.get_stairs_coords() and not self.closed :
+            self.sprite.blit( STAIR_SPRITE, ( self.get_stairs_coords()[0] * TILE_SIZE, self.get_stairs_coords()[1] * TILE_SIZE ) )
+        # if self.room_type == "F" and not self.closed :
+            # for y in range( 0, size[0] ) :
+            #     for x in range( 0, size[1] ) :
+            #         if layout[y][x] == ROOM_TAGS["STAIRS"] : 
+            #             self.sprite.blit( STAIR_SPRITE,  ( x * TILE_SIZE, y * TILE_SIZE ) )
 
     def get_sprite( self ) :
         return self.sprite

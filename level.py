@@ -71,10 +71,10 @@ class Level :
 
     def distribute_keys( self ) :
         for i in range( 0, self.num_keys ) :
+            print( i )
             room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
-            if room.room_type == "M" :
-                while not room.give_key() :
-                    room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
+            while not room.give_key() :
+                room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
 
 
     def reset_coords( self ) :
@@ -223,6 +223,9 @@ class Level :
             self.open_hatch()
             key_tiles.remove( player_tile )
             curr_room.draw_sprite()
+
+        # if curr_room.room_type == "F" :
+        #     for 
 
     def draw_room( self ) :
         room = self.get_room( self.player.get_room() )
