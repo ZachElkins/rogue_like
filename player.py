@@ -1,28 +1,16 @@
 from lib import *
 
-class Player :
+class Player( Character ) :
     
     def __init__( self, name ) :
+        super().__init__( "Player", PLAYER_SPRITES )
         self.name = name
         self.keys = 0
         self.level = 1
 
-    def move_tile( self, tile, direction ) :
-        self.tile = tile
-        self.sprite = PLAYER_SPRITES[direction]
-    
-    def move_room( self, room ) :
-        self.room = room
-
     def move_level( self ) :
         self.keys = 0
         self.level += 1
-
-    def get_room( self ) :
-        return self.room
-
-    def get_tile( self ) :
-        return self.tile
     
     def get_level( self ) :
         return self.level
@@ -36,6 +24,3 @@ class Player :
     def pick_up( self, item ) :
         if item == "KEY" :
             self.keys += 1
-
-    def get_sprite( self ) :
-        return self.sprite
