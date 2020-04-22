@@ -11,6 +11,8 @@ class Level :
         self.map = [[" "] * MAP_SIZE for _ in range( MAP_SIZE )]
 
         self.num_rooms = random.randint( 10, 30 )
+        
+        self.all_keys_found = False
 
         self.player = player
 
@@ -137,6 +139,7 @@ class Level :
                 if room.get_room_type() == "F" :
                     room.open_hatch()
                     room.draw_sprite()
+                    self.all_keys_found = True
     
     def get_num_keys( self ) :
         return self.num_keys
@@ -228,7 +231,7 @@ class Level :
             curr_room.draw_sprite()
 
         if curr_room.get_stairs_coords() :
-            if curr_room.get_stairs_coords() == player_tile :
+            if curr_room.get_stairs_coords() == player_tile and self.all_keys_found:
                 self.complete = True
 
     def draw_room( self ) :
