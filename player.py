@@ -3,7 +3,7 @@ from lib import *
 class Player( Character ) :
     
     def __init__( self, name ) :
-        super().__init__( "Player", PLAYER_SPRITES )
+        super().__init__( "Player", PLAYER_SPRITES, PLAYER_SOUNDS )
         self.name = name
         self.keys = 0
         self.level = 1
@@ -24,3 +24,6 @@ class Player( Character ) :
     def pick_up( self, item ) :
         if item == "KEY" :
             self.keys += 1
+            pygame.mixer.music.load( PICKUP_SOUNDS["KEY"] )
+            pygame.mixer.music.play( 1 )
+            

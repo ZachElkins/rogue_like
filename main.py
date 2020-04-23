@@ -70,7 +70,7 @@ def game_main_loop( game ) :
             key_released = True
 
 def main() :
-    
+    pygame.mixer.pre_init(44100, 16, 2, 4096)
     pygame.init()
 
     player_name = "Player Name"

@@ -8,6 +8,7 @@ from pygame.locals import *
 
 from constants import *
 from sprites import *
+from sounds import *
 from character import *
 from player import *
 from room import *
