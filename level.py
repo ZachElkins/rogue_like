@@ -23,12 +23,14 @@ class Level :
         self.assign_layouts()
         self.set_room_map()
         self.distribute_keys()
+        self.spawn_enemies()
 
     def generate( self ) :
         # Reset rooms
         self.room_coords = []
 
         self.num_keys = math.floor( self.num_rooms / 4 ) + random.randint( -1, 1 )
+        self.num_enemies = self.num_keys + random.randint( 2, 5 )
 
         # Create first room
         self.room_coords.append( ( random.randint( 0, self.size[0] ), random.randint( 0, self.size[1] ) ) )
@@ -78,6 +80,11 @@ class Level :
             while not room.give_key() :
                 room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
 
+    def spawn_enemies( self ) :
+        for i in range( 0, self.num_enemies ) :
+            room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
+            while not room.spawn_enemy() :
+                room = self.rooms[ random.randint (0, len( self.rooms )-1 ) ]
 
     def reset_coords( self ) :
         self.rooms = []
@@ -240,3 +247,6 @@ class Level :
 
     def get_player_sprite( self ) :
         return self.player.get_sprite()
+
+    def move_enemies( self, moves ) :
+        self.get_room( self.player.get_room() ).move_enemies( moves, self.player.get_tile() )

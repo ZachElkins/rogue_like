@@ -10,6 +10,7 @@ class Room :
         self.discovered = False
         self.closed = True
         self.keys = []
+        self.enemies = []
 
     def check_adjacent( self, level ) :
         self.num_adjacent = 0
@@ -204,17 +205,50 @@ class Room :
             for y in range( 0, size[1] ) :
                 if ( x, y ) in self.keys :
                     self.sprite.blit( ITEM_SPRITES["KEY"],( x * TILE_SIZE, y * TILE_SIZE ) )
+        
+        for enemy in self.enemies :
+            tile = enemy.get_tile()
+            self.sprite.blit( enemy.get_sprite(), ( tile[0] * TILE_SIZE, tile[1] * TILE_SIZE ) )
 
         if self.get_stairs_coords() and not self.closed :
             self.sprite.blit( STAIR_SPRITE, ( self.get_stairs_coords()[0] * TILE_SIZE, self.get_stairs_coords()[1] * TILE_SIZE ) )
-        # if self.room_type == "F" and not self.closed :
-            # for y in range( 0, size[0] ) :
-            #     for x in range( 0, size[1] ) :
-            #         if layout[y][x] == ROOM_TAGS["STAIRS"] : 
-            #             self.sprite.blit( STAIR_SPRITE,  ( x * TILE_SIZE, y * TILE_SIZE ) )
-
+        
     def get_sprite( self ) :
         return self.sprite
+    
+    def spawn_enemy( self ) :
+        
+        if self.get_free_tiles() <= 0 or self.room_type != "M" :
+            return False
+        
+        size = self.get_size()
+        layout = self.get_layout()
+
+        tile_found = False
+        while not tile_found :
+            # Enemies won't spawn on edges
+            x = random.randint( 1, size[0]-2 )
+            y = random.randint( 1, size[1]-2 )
+            if layout[y][x] == ROOM_TAGS["FLOOR"] and ( x, y ) not in self.get_enemy_coords() and ( x, y ) not in self.keys :
+                e = Enemy()
+                e.move_room( self.coords )
+                e.start_tile( ( x, y ) )
+                self.enemies.append( e )
+
+                tile_found = True
+                self.draw_sprite()
+                return True
+
+    def get_enemy_coords( self ) :
+        coords = []
+        for enemy in self.enemies :
+            coords.append( enemy.get_tile() )
+        return coords
+
+    def move_enemies( self, moves, player_coords ) :
+        for enemy in self.enemies :
+            enemy.set_target_coords( player_coords )
+            enemy.move_tile( moves )
 
 def get_tile_sprite( tile ) :
     if tile == ROOM_TAGS["WALL"]     : sprite = WALL_SPRITES[random.randint(0, len( WALL_SPRITES )-1 )]

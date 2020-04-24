@@ -10,6 +10,7 @@ from constants import *
 from sprites import *
 from sounds import *
 from character import *
+from enemy import *
 from player import *
 from room import *
 from level import *
