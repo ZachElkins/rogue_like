@@ -13,7 +13,6 @@ class Character :
         pygame.mixer.music.load( self.sounds["MOVEMENT"][ random.randint( 0, len( self.sounds["MOVEMENT"] )-1 ) ] )
         pygame.mixer.music.play( 1 )
 
-        
     def move_room( self, room ) :
         self.room = room
 

@@ -230,7 +230,7 @@ class Room :
             x = random.randint( 1, size[0]-2 )
             y = random.randint( 1, size[1]-2 )
             if layout[y][x] == ROOM_TAGS["FLOOR"] and ( x, y ) not in self.get_enemy_coords() and ( x, y ) not in self.keys :
-                e = Enemy()
+                e = Enemy( self.layout )
                 e.move_room( self.coords )
                 e.start_tile( ( x, y ) )
                 self.enemies.append( e )
